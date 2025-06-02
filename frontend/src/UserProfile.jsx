@@ -1,7 +1,7 @@
-export function User(){
+export function UserProfile(){
 
     return (
-        <div id='user'>
+        <div id='user-profile'>
             <div className="profile-header">
                 <h1>User profile</h1>
                 <img src='/image/profile.jpg' alt='' id='photo'/>
