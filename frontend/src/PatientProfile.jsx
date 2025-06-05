@@ -1,7 +1,7 @@
-export function UserProfile(){
+export function PatientProfile(){
 
     return (
-        <div id='user-profile'>
+        <div id='patient-profile'>
             <div className="profile-header">
                 <h1>User profile</h1>
                 <img src='/image/profile.jpg' alt='' id='photo'/>
@@ -19,10 +19,11 @@ export function UserProfile(){
                     <li>Weight: </li>
                     <li>Age: </li>
                     <li>Religion: </li>
+                    <li>Goal: </li>
+                    <li>Activity Level: </li>
                     <li>Health Issues: </li>
                     <li>Nuerodivergence: </li>
                     <li>Drug History: </li>
-
                 </ul>
             </div>
         </div>

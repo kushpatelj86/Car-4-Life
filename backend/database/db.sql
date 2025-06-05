@@ -1,12 +1,17 @@
-CREATE TABLE PATIENT (
-    user_id INT NOT NULL ,
-    username VARCHAR(255),
-    password VARCHAR(255),
+CREATE TABLE USER (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     phone_number VARCHAR(15),
-    email VARCHAR(255) UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    role ENUM('PATIENT', 'DOCTOR') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE PATIENT_PROFILE (
+    user_id INT PRIMARY KEY,
     dietary_choice VARCHAR(255),
     height FLOAT,
     weight FLOAT,
@@ -14,22 +19,16 @@ CREATE TABLE PATIENT (
     religion VARCHAR(255),
     goal ENUM('Lose', 'Maintain', 'Gain'),
     activity_level ENUM('Low', 'Moderate', 'High'),
-    PRIMARY KEY(user_id)
+    FOREIGN KEY(user_id) REFERENCES USER(user_id)
 );
 
-CREATE TABLE DOCTOR (
-    user_id INT NOT NULL ,
-    username VARCHAR(255),
-    password VARCHAR(255),
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    email VARCHAR(255) UNIQUE,
-    phone_number VARCHAR(15),
+CREATE TABLE DOCTOR_PROFILE (
+    user_id INT PRIMARY KEY,
     specialization VARCHAR(100),
     license_number VARCHAR(50) UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY(user_id)
+    FOREIGN KEY(user_id) REFERENCES USER(user_id)
 );
+
 
 CREATE TABLE NEURODIVERGENCE (
     neurodivergence_id INT NOT NULL ,
