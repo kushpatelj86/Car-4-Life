@@ -172,10 +172,24 @@ CREATE TABLE USER_VACCINATION_HISTORY (
     dose_number INT NOT NULL,
     date_administered DATE,
     patient_user_id INT NOT NULL,
+    status ENUM('Incomplete', 'Completed') NOT NULL,
     PRIMARY KEY(vaccination_history_id),
     FOREIGN KEY(user_vaccination_id) REFERENCES VACCINATION(vaccination_id),
     FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
 );
+
+CREATE TABLE RECCOMENED_VACINATION (
+    recommended_vaccination_id INT NOT NULL ,
+    recommended_vaccination INT NOT NULL,
+    number_of_doses INT NOT NULL,
+    PRIMARY KEY(recommended_vaccination_id),
+    patient_user_id INT NOT NULL,
+    PRIMARY KEY(recommended_vaccination_id),
+    FOREIGN KEY(recommended_vaccination) REFERENCES VACCINATION(vaccination_id),
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+);
+
+
 
 CREATE TABLE MEDICATION (
     medication_id INT NOT NULL ,
