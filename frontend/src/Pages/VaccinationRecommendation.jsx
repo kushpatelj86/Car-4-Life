@@ -1,4 +1,4 @@
-export function VaccinationRecommendations(){
+export function VaccinationRecommendation(){
 
     return (
         <div id='vaccination-recommendations'>

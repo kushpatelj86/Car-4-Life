@@ -1,4 +1,4 @@
-export function PatientProfile(){
+export function Profile(){
 
     return (
         <div id='patient-profile'>
