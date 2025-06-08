@@ -89,6 +89,7 @@ CREATE TABLE FOOD (
 
 CREATE TABLE MEAL_PLAN (
     meal_plan_id INT NOT NULL ,
+    meal_plan_type VARCHAR(255) ,
     breakfast_id INT NOT NULL,
     snack1_id INT NOT NULL,
     lunch_id INT NOT NULL,
@@ -106,6 +107,7 @@ CREATE TABLE MEAL_PLAN (
 
 CREATE TABLE WEEKLY_MEAL_PLAN (
     weekly_meal_plan_id INT NOT NULL  PRIMARY KEY,
+    weekly_meal_plan_type VARCHAR(255) ,
     patient_user_id INT NOT NULL,
     monday_meal_plan_id INT NOT NULL,
     tuesday_meal_plan_id INT NOT NULL,
@@ -115,6 +117,7 @@ CREATE TABLE WEEKLY_MEAL_PLAN (
     saturday_meal_plan_id INT NOT NULL,
     sunday_meal_plan_id INT NOT NULL,
     FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id),
+    FOREIGN KEY(weekly_meal_plan_type) REFERENCES MEAL_PLAN(meal_plan_type),
     FOREIGN KEY(monday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
     FOREIGN KEY(tuesday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
     FOREIGN KEY(wednesday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
