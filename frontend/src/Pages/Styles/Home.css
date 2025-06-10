@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4; /* Light grey background for a clean look */
+}
+
+
+
+
+#home{
+    text-align: center;
+    justify-content: center;
+
+}

@@ -11,7 +11,7 @@ import { MedicationRecommendations } from './Pages/MedicationRecommendations';
 import { VaccinationHistory } from './Pages/VaccinationHistory';
 import { VaccinationRecommendation } from './Pages/VaccinationRecommendation';
 import { Admin } from './Pages/Admin';
-import { Layout } from './Layout';
+import { Layout } from './Components/Layout';
 
 function App() {
   return (
@@ -33,6 +33,9 @@ function App() {
       </Routes>
     </Router>
   );
+
+  
+
 }
 
 export default App;

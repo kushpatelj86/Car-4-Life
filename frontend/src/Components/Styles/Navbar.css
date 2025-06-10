@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4; /* Light grey background for a clean look */
+}
+
+
+#navbar{
+
+    text-decoration: none;
+      border: none;
+
+    text-align: center;
+    justify-content: center;
+
+}
+
+.link-styles {
+    justify-content: space-around;
+    padding: 0 30px;
+
+}
+
+
+
+#navbar button{
+
+    text-decoration: none;
+    background-color: rgb(171, 235, 108);
+    justify-content: space-between;
+    text-align: center;
+    border-radius: 49px;
+    margin: 10px 0;
+
+
+}
