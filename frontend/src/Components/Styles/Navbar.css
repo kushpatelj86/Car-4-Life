@@ -30,8 +30,18 @@
     background-color: rgb(171, 235, 108);
     justify-content: space-between;
     text-align: center;
-    border-radius: 49px;
+    border-radius: 5px;
     margin: 10px 0;
+    font-family: 'Garamond', serif	;
 
+
+
+}
+
+#navbar button:hover{
+
+
+    background-color: rgb(108, 235, 222);
+    
 
 }

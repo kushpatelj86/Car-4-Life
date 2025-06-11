@@ -1,12 +1,14 @@
+import profileImage from "./Images/defaultprofileicon.png"
+
 export function Profile(){
 
     return (
         <div id='patient-profile'>
             <div className="profile-header">
                 <h1>User profile</h1>
-                <img src='/image/profile.jpg' alt='' id='photo'/>
-                <input type='file' id="file" />
-                <label for='file' id='uploadButton'></label>
+                <div className="profile-image">
+                    <img src={profileImage}/>
+                </div>
             </div>
 
 

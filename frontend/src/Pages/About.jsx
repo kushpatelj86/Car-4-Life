@@ -1,3 +1,7 @@
+import './Styles/About.css'
+
+
+
 export function About(){
     return (
 
