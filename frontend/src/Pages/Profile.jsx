@@ -1,13 +1,36 @@
 import profileImage from "./Images/defaultprofileicon.png"
+import './Styles/Profile.css'
+
+
+function updatePhoto(){
+    let profilePic = document.getElementById('profile-pic');
+    let inputFile = document.getElementById('profile-photo-input-file');
+
+    profilePic.src=URL.createObjectURL(inputFile.files[0])
+}
+
+
+
+
 
 export function Profile(){
 
     return (
+
+
         <div id='patient-profile'>
+
+            <h1>User profile</h1>
+
+
+
+
+
             <div className="profile-header">
-                <h1>User profile</h1>
                 <div className="profile-image">
-                    <img src={profileImage}/>
+                    <img src={profileImage} id="profile-pic"/>
+                    <label htmlFor="input-file">Update Profile Photo</label>
+                    <input type="file" accept="image/jpg, image/png, image/jpeg" id="profile-photo-input-file" onChange={updatePhoto}></input>
                 </div>
             </div>
 

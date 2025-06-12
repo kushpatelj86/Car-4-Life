@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
+}
+
+.profile-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.profile-image{
+
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+
+}
+
+.profile-image h1{
+    font-weight: 450;
+    color:black;
+
+}
+
+.profile-image img{
+    width: 180px;
+    height:180px;
+    border-radius: 50%;
+
+}
+
+label{
+    display: block;
+    width: 200px;
+    color: black;
+    padding: 12px;
+    margin: 10px auto;
+    cursor: pointer;
+}
