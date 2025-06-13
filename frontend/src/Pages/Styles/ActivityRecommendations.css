@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4; /* Light grey background for a clean look */
+}
+
+
+
+
+#activity-recommendations{
+    text-align: center;
+    justify-content: center;
+
+}
+
+
+.activity-recommendations-head{
+    font-family: "Gill Sans", sans-serif;
+    justify-content: space-around;
+}
+
+
+.activity-recommendations-option{
+    font-family: "Gill Sans", sans-serif;
+    justify-content: space-around;
+
+}

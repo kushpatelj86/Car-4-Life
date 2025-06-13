@@ -19,11 +19,11 @@ export function About(){
             After the data given is analysed and the tables are created, the user will be taken back to 
             another front end, which will display the recommended meal plan, medications, exercises, and 
             vaccinations. The user then has an option to update his information later on or return to 
-            the log-in page.. There will be a menu where there'll be a home page, the user has an 
+            the log-in page. There will be a menu where there'll be a home page, the user has an 
             option to update their profile information, such as their health and login information, and a 
             page where they can go to and retrieve all the information that is recommended for them.
             In a post-pandemic world, telehealth appointments are rising for many reasons, and 
-            in-person Doctor visits are becoming more limited. Healthfix fills a 
+            in-person Doctor visits are becoming more limited. HealthFix fills a 
             critical gap in accessibility. It serves as a support system for people who may not have 
             regular medical care, while also promoting a culture of proactive health management for 
             everyone.
