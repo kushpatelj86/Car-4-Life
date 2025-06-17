@@ -12,13 +12,15 @@ import { VaccinationHistory } from './Pages/VaccinationHistory';
 import { VaccinationRecommendation } from './Pages/VaccinationRecommendation';
 import { Admin } from './Pages/Admin';
 import { Layout } from './Components/Layout';
+import { Login } from './Pages/Login';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route  element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="activity-recomendation" element={<ActivityRecommendations />} />
           <Route path="appointment" element={<Appointment />} />

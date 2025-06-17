@@ -4,7 +4,7 @@ import "./Styles/Navbar.css"
 export function Navbar(){
     return (
         <div id="navbar">
-            <Link className={"link-styles"} to="/"><button>Home</button></Link>
+            <Link className={"link-styles"} to="/home"><button>Home</button></Link>
             <Link className={"link-styles"} to="/about"><button>About</button></Link>
             <Link className={"link-styles"} to="/activity-recomendation"><button>Activity Recommendations</button></Link>
             <Link  className={"link-styles"}to="/appointment"><button>Appointment</button></Link>
