@@ -13,6 +13,7 @@ import { VaccinationRecommendation } from './Pages/VaccinationRecommendation';
 import { Admin } from './Pages/Admin';
 import { Layout } from './Components/Layout';
 import { Login } from './Pages/Login';
+import { SignUp } from './Pages/SignUp';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="vaccination-history" element={<VaccinationHistory />} />
           <Route path="vaccination-recommendation" element={<VaccinationRecommendation />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>
