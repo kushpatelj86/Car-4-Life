@@ -46,3 +46,28 @@ label{
     margin: 10px auto;
     cursor: pointer;
 }
+
+
+.profile-information{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: space-around;
+
+}
+
+#profile-change-button{
+    text-decoration: none;
+    background-color: rgb(171, 235, 108);
+    justify-content: space-between;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: 'Garamond', serif	;
+}
+
+
+#profile-change-button:hover{
+        background-color: rgb(108, 235, 222);
+
+}
+

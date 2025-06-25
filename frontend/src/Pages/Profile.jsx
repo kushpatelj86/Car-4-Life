@@ -1,6 +1,7 @@
+import { useState } from "react";
 import profileImage from "./Images/defaultprofileicon.png"
 import './Styles/Profile.css'
-
+import {ProfileForm} from '../Components/ProfileForm.jsx'
 
 function updatePhoto(){
     let profilePic = document.getElementById('profile-pic');
@@ -14,6 +15,15 @@ function updatePhoto(){
 
 
 export function Profile(){
+
+    const [changeProfile, setChangeProfile] = useState(false);
+
+
+    function handleChangeProfile(event){
+        event.preventDefault()
+
+        setChangeProfile(!changeProfile);
+    }
 
     return (
 
@@ -50,6 +60,15 @@ export function Profile(){
                     <li>Nuerodivergence: </li>
                     <li>Drug History: </li>
                 </ul>
+            </div>
+
+
+
+
+
+            <div id="profile-change">
+                {changeProfile ? 
+                <ProfileForm handleChangeAcount={handleChangeProfile} />: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
             </div>
         </div>
     );
