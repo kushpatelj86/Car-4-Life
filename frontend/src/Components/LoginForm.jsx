@@ -2,13 +2,13 @@ import { useState } from 'react'
 import React from 'react'
 import "./Styles/LoginForm.css"
 
-export function LoginForm(props){
+export function LoginForm({onSubmit,handleHasAccount}){
 
     
 
     return (
         <div>
-            <form onSubmit={props.onSubmit} id='login-form'>
+            <form onSubmit={onSubmit} id='login-form'>
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username"/><br/><br/>
                 <label htmlFor="password">Password</label>
@@ -18,7 +18,7 @@ export function LoginForm(props){
                 <button type="submit">Log In</button>
                 <div id='registration-link'>
                     <p>Don't have an account register here </p>
-                    <button onClick={props.handleHasAccount} type="submit">Register Here</button>
+                    <button onClick={() => handleHasAccount(false) } type="submit">Register Here</button>
                 </div>
             </form>
         </div>

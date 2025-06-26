@@ -1,16 +1,21 @@
 import { useState } from 'react'
 import React from 'react'
 
-export function ProfileForm(props){
+export function SignUpForm({onSubmit,handleHasAccount}){
+
+    
+
     return (
         <div>
-            <form onSubmit={props.onSubmit} id='profile-form'>
-
-                <label htmlFor="full-name">Name</label>
+            <form onSubmit={onSubmit} id='signup-form'>
+               <label htmlFor="full-name">Name</label>
                 <input type="text" id="full-name" name="full-name"/><br/><br/>
                 
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username"/><br/><br/>
+
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" name="password"/><br/><br/>
 
                 <label htmlFor="dietary-choice">Dietary Choice</label>
                 <input type="text" id="dietary-choice" name="dietary-choice"/><br/><br/>
@@ -39,8 +44,10 @@ export function ProfileForm(props){
                 <label htmlFor="drug-history">Drug History</label>
                 <input type="text" id="drug-history" name="drug-history"/><br/><br/>
 
-                <button type="submit" onClick={props.handleChangeAcount}>Update Profile</button>
+                <button type="button" onClick={() => handleHasAccount(true)}>Create Profile</button>
             </form>
         </div>
+
     );
 }
+

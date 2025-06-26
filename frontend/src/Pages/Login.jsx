@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
-import {LoginForm} from '../Components/LoginForm'
+import {LoginForm} from '../Components/LoginForm.jsx'
 import { Navigate } from 'react-router-dom'
 
 
@@ -8,16 +8,20 @@ import { Navigate } from 'react-router-dom'
 
 export function Login(){
 
-    const [hasAccount, setHasAccount] = useState(true);
+    const [hasAccount, setHasAccount] = useState(null);
 
 
-    function handleHasAccount(e){
-        e.preventDefault();
-        setHasAccount(false);
-
+    function handleHasAccount(val){
+        setHasAccount(val);
     }
+
+    function handleLoginSubmit(e) {
+  e.preventDefault();
+  console.log("Logging in...");
+}
+
     
-        if(!hasAccount)
+        if(hasAccount === false)
         {
             return <Navigate to="/sign-up" replace />;
 
@@ -26,9 +30,8 @@ export function Login(){
 
 
     return (
-        <div>
-            <LoginForm handleHasAccount={handleHasAccount} />
-
+        <div >
+            <LoginForm handleHasAccount={handleHasAccount } onSubmit={handleLoginSubmit}/>
         </div>
 
     );
