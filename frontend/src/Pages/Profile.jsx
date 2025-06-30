@@ -59,6 +59,8 @@ export function Profile(){
                     <li>Health Issues: </li>
                     <li>Nuerodivergence: </li>
                     <li>Drug History: </li>
+                    <li>Role: </li>
+
                 </ul>
             </div>
 

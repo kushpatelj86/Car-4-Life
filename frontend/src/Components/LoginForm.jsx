@@ -2,7 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import "./Styles/LoginForm.css"
 
-export function LoginForm({onSubmit,handleHasAccount}){
+export function LoginForm({onSubmit,handleHasAccount, handleIsLoggedIn}){
 
     
 
@@ -15,7 +15,7 @@ export function LoginForm({onSubmit,handleHasAccount}){
                 <input type="text" id="password" name="password"/><br/><br/>
                 <br />
                 <br />
-                <button type="submit">Log In</button>
+                <button onClick={() => handleIsLoggedIn(true) } type="submit">Log In</button>
                 <div id='registration-link'>
                     <p>Don't have an account register here </p>
                     <button onClick={() => handleHasAccount(false) } type="submit">Register Here</button>

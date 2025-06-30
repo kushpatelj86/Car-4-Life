@@ -19,8 +19,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route  element={<Layout />}>
+        <Route>
           <Route path="/" element={<Login />} />
+          <Route path="sign-up" element={<SignUp />} />
+
+        </Route>
+        <Route  element={<Layout />}>
           <Route path="/home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="activity-recomendation" element={<ActivityRecommendations />} />
@@ -32,7 +36,6 @@ function App() {
           <Route path="vaccination-history" element={<VaccinationHistory />} />
           <Route path="vaccination-recommendation" element={<VaccinationRecommendation />} />
           <Route path="admin" element={<Admin />} />
-          <Route path="sign-up" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>
