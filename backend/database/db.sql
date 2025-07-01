@@ -1,4 +1,4 @@
-CREATE TABLE USER (
+CREATE TABLE IF NOT EXISTS USER (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -6,43 +6,51 @@ CREATE TABLE USER (
     last_name VARCHAR(100),
     phone_number VARCHAR(15),
     email VARCHAR(255) UNIQUE NOT NULL,
-    role ENUM('Patient', 'Doctor','Admin') NOT NULL,
+    role ENUM('PATIENT_PROFILE', 'Doctor', 'Admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE PATIENT_PROFILE (
+
+ CREATE TABLE IF NOT EXISTS PATIENT_PROFILE (
     user_id INT PRIMARY KEY,
     dietary_choice VARCHAR(255),
-    height FLOAT,
-    weight FLOAT,
+    height DECIMAL(5,2),
+    weight DECIMAL(5,2),
     age INT,
     religion VARCHAR(255),
     goal ENUM('Lose', 'Maintain', 'Gain'),
     activity_level ENUM('Low', 'Moderate', 'High'),
+    access_level ENUM('Low', 'Medium', 'High') DEFAULT 'Low',
     FOREIGN KEY(user_id) REFERENCES USER(user_id)
 );
 
-CREATE TABLE DOCTOR_PROFILE (
+ CREATE TABLE IF NOT EXISTS DOCTOR_PROFILE (
     user_id INT PRIMARY KEY,
     specialization VARCHAR(100),
     license_number VARCHAR(50) UNIQUE,
+    access_level ENUM('Low', 'Medium', 'High') DEFAULT 'Medium',
+    FOREIGN KEY(user_id) REFERENCES USER(user_id)
+);
+CREATE TABLE IF NOT EXISTS ADMIN_PROFILE (
+    user_id INT PRIMARY KEY,
+    department VARCHAR(100),
+    access_level ENUM('Low', 'Medium', 'High') DEFAULT 'Medium',
     FOREIGN KEY(user_id) REFERENCES USER(user_id)
 );
 
-
-CREATE TABLE NEURODIVERGENCE (
-    neurodivergence_id INT NOT NULL ,
-    condition VARCHAR(255),
+ CREATE TABLE IF NOT EXISTS NEURODIVERGENCE (
+    neurodivergence_id INT NOT NULL,
+    nuero_condition VARCHAR(255),
     date_of_diagnosis DATE,
     length_of_diagnosis INT,
     severity VARCHAR(255),
     intention_for_treatment VARCHAR(255),
     patient_user_id INT NOT NULL,
     PRIMARY KEY(neurodivergence_id), 
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE HEALTH_ISSUE (
+ CREATE TABLE IF NOT EXISTS HEALTH_ISSUE (
     health_issue_id INT NOT NULL ,
     health_issue_title VARCHAR(255),
     severity VARCHAR(255),
@@ -51,18 +59,18 @@ CREATE TABLE HEALTH_ISSUE (
     end_date DATE,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(health_issue_id), 
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE ALLERGY (
+CREATE TABLE IF NOT EXISTS ALLERGY (
     allergy_id INT NOT NULL ,
     allergy VARCHAR(255),
     patient_user_id INT NOT NULL,
     PRIMARY KEY(allergy_id), 
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE DRUG_HISTORY (
+ CREATE TABLE IF NOT EXISTS DRUG_HISTORY (
     drug_history_id INT NOT NULL ,
     drug_name VARCHAR(255),
     severity VARCHAR(255),
@@ -71,10 +79,10 @@ CREATE TABLE DRUG_HISTORY (
     end_date DATE,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(drug_history_id), 
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE FOOD (
+CREATE TABLE IF NOT EXISTS FOOD (
     food_id INT NOT NULL ,
     food_name VARCHAR(255),
     calories INT,
@@ -87,7 +95,7 @@ CREATE TABLE FOOD (
     PRIMARY KEY(food_id)
 );
 
-CREATE TABLE MEAL_PLAN (
+CREATE TABLE IF NOT EXISTS MEAL_PLAN (
     meal_plan_id INT NOT NULL ,
     meal_plan_type VARCHAR(255) ,
     breakfast_id INT NOT NULL,
@@ -102,10 +110,10 @@ CREATE TABLE MEAL_PLAN (
     FOREIGN KEY(lunch_id) REFERENCES FOOD(food_id),
     FOREIGN KEY(snack2_id) REFERENCES FOOD(food_id),
     FOREIGN KEY(dinner_id) REFERENCES FOOD(food_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE WEEKLY_MEAL_PLAN (
+CREATE TABLE IF NOT EXISTS WEEKLY_MEAL_PLAN (
     weekly_meal_plan_id INT NOT NULL  PRIMARY KEY,
     weekly_meal_plan_type VARCHAR(255) ,
     patient_user_id INT NOT NULL,
@@ -116,8 +124,7 @@ CREATE TABLE WEEKLY_MEAL_PLAN (
     friday_meal_plan_id INT NOT NULL,
     saturday_meal_plan_id INT NOT NULL,
     sunday_meal_plan_id INT NOT NULL,
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id),
-    FOREIGN KEY(weekly_meal_plan_type) REFERENCES MEAL_PLAN(meal_plan_type),
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id),
     FOREIGN KEY(monday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
     FOREIGN KEY(tuesday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
     FOREIGN KEY(wednesday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id),
@@ -127,7 +134,7 @@ CREATE TABLE WEEKLY_MEAL_PLAN (
     FOREIGN KEY(sunday_meal_plan_id) REFERENCES MEAL_PLAN(meal_plan_id)
 );
 
-CREATE TABLE ACTIVITY (
+CREATE TABLE IF NOT EXISTS ACTIVITY (
     activity_id INT NOT NULL ,
     activity_name VARCHAR(255),
     length_of_activity INT,
@@ -140,7 +147,7 @@ CREATE TABLE ACTIVITY (
     PRIMARY KEY(activity_id)
 );
 
-CREATE TABLE ACTIVITY_PLAN (
+CREATE TABLE IF NOT EXISTS ACTIVITY_PLAN (
     activity_plan_id INT NOT NULL ,
     sunday_activity_id INT NOT NULL,
     monday_activity_id INT NOT NULL,
@@ -151,7 +158,7 @@ CREATE TABLE ACTIVITY_PLAN (
     saturday_activity_id INT NOT NULL,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(activity_plan_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id),
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id),
     FOREIGN KEY(sunday_activity_id) REFERENCES ACTIVITY(activity_id),
     FOREIGN KEY(monday_activity_id) REFERENCES ACTIVITY(activity_id),
     FOREIGN KEY(tuesday_activity_id) REFERENCES ACTIVITY(activity_id),
@@ -161,7 +168,7 @@ CREATE TABLE ACTIVITY_PLAN (
     FOREIGN KEY(saturday_activity_id) REFERENCES ACTIVITY(activity_id)
 );
 
-CREATE TABLE VACCINATION (
+CREATE TABLE IF NOT EXISTS VACCINATION (
     vaccination_id INT NOT NULL ,
     vaccination_name VARCHAR(255),
     vaccination_types VARCHAR(255),
@@ -169,7 +176,7 @@ CREATE TABLE VACCINATION (
     PRIMARY KEY(vaccination_id)
 );
 
-CREATE TABLE USER_VACCINATION_HISTORY (
+CREATE TABLE IF NOT EXISTS USER_VACCINATION_HISTORY (
     vaccination_history_id INT NOT NULL ,
     user_vaccination_id INT NOT NULL,
     dose_number INT NOT NULL,
@@ -178,23 +185,20 @@ CREATE TABLE USER_VACCINATION_HISTORY (
     status ENUM('Incomplete', 'Completed') NOT NULL,
     PRIMARY KEY(vaccination_history_id),
     FOREIGN KEY(user_vaccination_id) REFERENCES VACCINATION(vaccination_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE RECCOMENED_VACINATION (
+CREATE TABLE IF NOT EXISTS RECCOMENED_VACINATION (
     recommended_vaccination_id INT NOT NULL ,
     recommended_vaccination INT NOT NULL,
     number_of_doses INT NOT NULL,
-    PRIMARY KEY(recommended_vaccination_id),
     patient_user_id INT NOT NULL,
     PRIMARY KEY(recommended_vaccination_id),
     FOREIGN KEY(recommended_vaccination) REFERENCES VACCINATION(vaccination_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-
-
-CREATE TABLE MEDICATION (
+CREATE TABLE IF NOT EXISTS MEDICATION (
     medication_id INT NOT NULL ,
     medication_name VARCHAR(255),
     medication_type VARCHAR(255),
@@ -202,7 +206,7 @@ CREATE TABLE MEDICATION (
     PRIMARY KEY(medication_id)
 );
 
-CREATE TABLE MEDICATION_BASIS (
+CREATE TABLE IF NOT EXISTS MEDICATION_BASIS (
     medication_basis_id INT NOT NULL ,
     morning_medication_id INT NOT NULL,
     evening_medication_id INT NOT NULL,
@@ -210,10 +214,13 @@ CREATE TABLE MEDICATION_BASIS (
     PRIMARY KEY(medication_basis_id),
     FOREIGN KEY(morning_medication_id) REFERENCES MEDICATION(medication_id),
     FOREIGN KEY(evening_medication_id) REFERENCES MEDICATION(medication_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
 );
 
-CREATE TABLE APPOINTMENT (
+
+
+
+CREATE TABLE IF NOT EXISTS APPOINTMENT (
     appointment_id INT NOT NULL ,
     date_of_appointment DATE,
     time_of_appointment TIME,
@@ -221,6 +228,6 @@ CREATE TABLE APPOINTMENT (
     doctor_user_id INT NOT NULL,
     reason_for_appointment VARCHAR(255),
     PRIMARY KEY(appointment_id),
-    FOREIGN KEY(patient_user_id) REFERENCES PATIENT(user_id),
-    FOREIGN KEY(doctor_user_id) REFERENCES DOCTOR(user_id)
+    FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id),
+    FOREIGN KEY(doctor_user_id) REFERENCES DOCTOR_PROFILE(user_id)
 );
