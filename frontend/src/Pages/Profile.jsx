@@ -1,7 +1,7 @@
 import { useState } from "react";
 import profileImage from "./Images/defaultprofileicon.png"
 import './Styles/Profile.css'
-import {ProfileForm} from '../Components/ProfileForm.jsx'
+import {UpdateList} from '../Components/UpdateList.jsx'
 
 function updatePhoto(){
     let profilePic = document.getElementById('profile-pic');
@@ -65,12 +65,9 @@ export function Profile(){
             </div>
 
 
-
-
-
             <div id="profile-change">
                 {changeProfile ? 
-                <ProfileForm handleChangeAcount={handleChangeProfile} />: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
+                <UpdateList handleChangeAcount={handleChangeProfile} />: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS USER (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(100),
@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS ADMIN_PROFILE (
     severity VARCHAR(255),
     duration INT,
     start_date DATE NOT NULL,
-    end_date DATE,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(health_issue_id), 
     FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import React from 'react'
 
-export function ProfileForm(props){
+export function PatientProfileForm(props){
     return (
         <div>
             <form onSubmit={props.onSubmit} id='profile-form'>
@@ -9,6 +9,11 @@ export function ProfileForm(props){
                 <label htmlFor="full-name">Name</label>
                 <input type="text" id="full-name" name="full-name"/><br/><br/>
                 
+
+                <label htmlFor="user-id">User Id</label>
+                <input type="number" id="user-id" name="full-name"/><br/><br/>
+                
+
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username"/><br/><br/>
 
@@ -29,15 +34,6 @@ export function ProfileForm(props){
 
                 <label htmlFor="activity-level">Activity Level</label>
                 <input type="text" id="activity-level" name="activity-level"/><br/><br/>
-
-                <label htmlFor="health-issues">Health Issues</label>
-                <input type="text" id="health-issues" name="health-issues"/><br/><br/>
-
-                <label htmlFor="neurodivergence">Neurodivergence</label>
-                <input type="text" id="neurodivergence" name="neurodivergence"/><br/><br/>
-
-                <label htmlFor="drug-history">Drug History</label>
-                <input type="text" id="drug-history" name="drug-history"/><br/><br/>
 
                 <button type="submit" onClick={props.handleChangeAcount}>Update Profile</button>
             </form>

@@ -80,7 +80,6 @@ db.connect(function(err) {
     severity VARCHAR(255),
     duration INT,
     start_date DATE NOT NULL,
-    end_date DATE,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(health_issue_id), 
     FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
@@ -98,7 +97,6 @@ db.connect(function(err) {
     severity VARCHAR(255),
     length INT,
     start_date DATE NOT NULL,
-    end_date DATE,
     patient_user_id INT NOT NULL,
     PRIMARY KEY(drug_history_id), 
     FOREIGN KEY(patient_user_id) REFERENCES PATIENT_PROFILE(user_id)
