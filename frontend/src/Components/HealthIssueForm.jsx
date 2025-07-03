@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
+import "./Styles/HealthIssueForm.css"
 
 export function HealthIssueForm(props){
     return (

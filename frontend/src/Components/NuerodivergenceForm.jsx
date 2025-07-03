@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
+import "./Styles/NuerodivergenceForm.css"
 
 export function NuerodivergenceForm(props){
     return (
         <div>
-            <form onSubmit={props.onSubmit} id='profile-form'>
+            <form onSubmit={props.onSubmit} id='nuerodivergence-form'>
 
                 <label htmlFor="Condition">Condition</label>
                 <input type="text" id="condition" name="condition"/><br/><br/>

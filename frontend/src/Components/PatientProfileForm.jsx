@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
+import "./Styles/PatientProfileForm.css"
 
 export function PatientProfileForm(props){
     return (
         <div>
-            <form onSubmit={props.onSubmit} id='profile-form'>
+            <form onSubmit={props.onSubmit} id='patient-profile-form'>
 
                 <label htmlFor="full-name">Name</label>
                 <input type="text" id="full-name" name="full-name"/><br/><br/>
