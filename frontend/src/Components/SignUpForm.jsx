@@ -2,16 +2,29 @@ import { useState } from 'react'
 import React from 'react'
 import "./Styles/SignUpForm.css"
 
-export function SignUpForm({onSubmit,handleHasAccount}){
+export function SignUpForm({onSubmit,handleHasAccount,submitData}){
 
-    
+    const healthIssues = ['Diabetes', 'Heart Desiese', 'Cancer', 'Asthma',
+        'Arhirtus','High Cholesterol','Obesity','Rashes','Acne','Dermatitis',
+    'High Blood Pressure','Stress','Back Pain','None']
+
+    const neurodivergence = ['Autism', 'ADHD', 'Bipolar', 'Asthma',
+        'OCD','Depression','Anxiety','PTSD','Down Syndromw','Nuerotypical']
+
+
+    const drughistory = ['Smoker','Alcoholic','Drug Abuse','Vaper', 'None']
 
     return (
         <div>
-            <form onSubmit={onSubmit} id='signup-form'>
-               <label htmlFor="full-name">Name</label>
-                <input type="text" id="full-name" name="full-name"/><br/><br/>
+            <form onSubmit={onSubmit} id='signup-form' action="POST">
+                <label htmlFor="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name"/><br/><br/>
                 
+                <label htmlFor="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name"/><br/><br/>
+            
+
+
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username"/><br/><br/>
 
@@ -46,25 +59,51 @@ export function SignUpForm({onSubmit,handleHasAccount}){
                 </select>
                 <br/><br/>
                 <label htmlFor="health-issues">Health Issues</label>
-                <input type="text" id="health-issues" name="health-issues"/><br/><br/>
+                {healthIssues.map((val)=>
+                (
+                    <div>
+                        <input type="checkbox" id="health-issues" name="health-issues" value={val} />
+                        <label htmlFor="health-issues">{val}</label>
+                    </div>
+                ))}
+                
+                
+                <br/><br/>
 
                 <label htmlFor="neurodivergence">Neurodivergence</label>
-                <input type="text" id="neurodivergence" name="neurodivergence"/><br/><br/>
+                {neurodivergence.map((val)=>
+                (
+                    
+                    <div>
+                        <input type="checkbox" id="neurodivergence" name="neurodivergence" value={val} />
+                        <label htmlFor="neurodivergence">{val}</label>
+                    </div>
+
+                ))}
+
 
                 <label htmlFor="drug-history">Drug History</label>
-                <input type="text" id="drug-history" name="drug-history"/><br/><br/>
-
+                {drughistory.map((val)=>
+                (
+                    <div>
+                        <input type="checkbox" id="drug-history" name="drug-history" value={val} />
+                        <label htmlFor="drug-history">{val}</label>
+                        </div>
+  
+                ))}
                 <label htmlFor="role">Role</label>
                 <select id="role" name="role">
                     <option value="doctor">Doctor</option>
                     <option value="patient">Patient</option>
                     <option value="admin">Admin</option>
                 </select>
+
+
                 <br/><br/>
 
 
 
-                <button type="button" onClick={() => handleHasAccount(true)}>Create Profile</button>
+                <button type="submit">Create Profile</button>
             </form>
         </div>
 
