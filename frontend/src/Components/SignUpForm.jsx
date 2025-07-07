@@ -59,10 +59,12 @@ export function SignUpForm({onSubmit,handleHasAccount,submitData}){
                 </select>
                 <br/><br/>
                 <label htmlFor="health-issues">Health Issues</label>
-                {healthIssues.map((val)=>
+                {
+                healthIssues.map((val)=>
                 (
-                    <div>
-                        <input type="checkbox" id="health-issues" name="health-issues" value={val} />
+                     
+                    <div key={val}>
+                        <input type="checkbox" id={`health-issues-${val.replace(/ /g,"_")}`} name="health-issues" value={val} />
                         <label htmlFor="health-issues">{val}</label>
                     </div>
                 ))}
@@ -74,8 +76,8 @@ export function SignUpForm({onSubmit,handleHasAccount,submitData}){
                 {neurodivergence.map((val)=>
                 (
                     
-                    <div>
-                        <input type="checkbox" id="neurodivergence" name="neurodivergence" value={val} />
+                    <div key={val}>
+                        <input type="checkbox" id={`neurodivergence-${val.replace(/ /g,"_")}`} name="neurodivergence" value={val} />
                         <label htmlFor="neurodivergence">{val}</label>
                     </div>
 
@@ -85,8 +87,8 @@ export function SignUpForm({onSubmit,handleHasAccount,submitData}){
                 <label htmlFor="drug-history">Drug History</label>
                 {drughistory.map((val)=>
                 (
-                    <div>
-                        <input type="checkbox" id="drug-history" name="drug-history" value={val} />
+                    <div key={val}>
+                        <input type="checkbox" id={`drug-history-${val.replace(/ /g,"_")}`} name="drug-history" value={val} />
                         <label htmlFor="drug-history">{val}</label>
                         </div>
   
