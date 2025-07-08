@@ -1,5 +1,5 @@
 import express from 'express';
-import db from '../database/db.js'
+import {db} from '../database/db.js'
 const port = process.env.PORT || 8000;
 const userrouter = express.Router()
 
@@ -9,7 +9,25 @@ userrouter.get("/",(req,res) =>{
 
 
 userrouter.post("/",(req,res) =>{
-    sql = "INSERT INTO USER (`username`, `password`,`first_name`,`last_name`,`phone_number`,`email`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    const sql_statement = "INSERT INTO USER (`username`, `password`,`first_name`,`last_name`,`phone_number`,`email`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    console.log("req.body.username ",req.body.username );
+
+    const values = [
+        req.body.username,
+        req.body.password,
+        req.body.first_name,
+        req.body.last_name,
+        req.body.phone_number,
+        req.body.email,
+        req.body.role,
+    ]
+
+    db.query(sql_statement,values, function (err, result) {
+    if (err) return res.json({message: 'Something unexpected has occured '+err})
+    
+    return res.json({success:"Student added successfully"})
+  })
+    
 })
 
 

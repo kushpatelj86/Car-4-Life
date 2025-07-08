@@ -20,32 +20,44 @@ export function SignUp(){
         lastname: '',
         username: '',
         password: '',
-        dietarychoice: '',
-        height: '',
-        weight: '',
-        relgion: '',
-        goal: '',
-        activitylevel: '',
-        healthissues: [],
-        neurodivergence: [],
-        drughistory: [],
+        phonenumber: '',
+        email: '',
         role: '',
 
     }
     )
-    function submitData(e)
-    {
-        e.preventDefault();
-        axios.post('/user')
-    }
+
+    const handleValsChange = e => {
+
+        const id = e.target.id;
+
+
+
+        setValues({...values, [id] : e.target.value});
+
+    
+    };
+
+    
 
     function handleHasAccount(val){
         setHasAccount(val);
     }
 
     function handleSignUpSubmit(e) {
-  e.preventDefault();
-  console.log("Signing Up...");
+        e.preventDefault();
+        axios.post('http://127.0.0.1:8000/user',values)
+        .then((res) =>{
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+            alert(err)
+        }  
+        )
+
+        console.log("Signing Up...");
+        alert("Signing Up...");
 }
 
     
@@ -60,7 +72,7 @@ export function SignUp(){
 
     return (
         <div>
-            <SignUpForm  handleHasAccount={handleHasAccount } onSubmit={handleSignUpSubmit}/>
+            <SignUpForm  handleHasAccount={handleHasAccount } handleSignUpSubmit={handleSignUpSubmit} handleValsChange={handleValsChange}/>
             
         </div>
     );
