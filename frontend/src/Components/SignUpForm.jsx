@@ -9,11 +9,11 @@ export function SignUpForm({handleSignUpSubmit,handleValsChange}){
     return (
         <div>
             <form  id='signup-form' action="POST" onSubmit={handleSignUpSubmit}>
-                <label htmlFor="firstname">First Name</label>
-                <input type="text" id="firstname" name="firstname" onChange={handleValsChange}/><br/><br/>
+                <label htmlFor="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" onChange={handleValsChange}/><br/><br/>
                 
-                <label htmlFor="lastname">Last Name</label>
-                <input type="text" id="lastname" name="lastname" onChange={handleValsChange}/><br/><br/>
+                <label htmlFor="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" onChange={handleValsChange}/><br/><br/>
             
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username" onChange={handleValsChange}/><br/><br/>
@@ -28,8 +28,8 @@ export function SignUpForm({handleSignUpSubmit,handleValsChange}){
                 
 
 
-                <label htmlFor="phonenumber">Phone Number</label>
-                <input type="tel" id="phonenumber" name="phonenumber" onChange={handleValsChange}/><br/><br/>
+                <label htmlFor="phone_number">Phone Number</label>
+                <input type="tel" id="phone_number" name="phone_number" onChange={handleValsChange}/><br/><br/>
 
                 
 

@@ -16,11 +16,11 @@ export function SignUp(){
     const [hasAccount, setHasAccount] = useState(false);
     const [values,setValues] = useState(
        { 
-        firstname: '',
-        lastname: '',
+        first_name: '',
+        last_name: '',
         username: '',
         password: '',
-        phonenumber: '',
+        phone_number: '',
         email: '',
         role: '',
 
@@ -48,7 +48,8 @@ export function SignUp(){
         e.preventDefault();
         axios.post('http://127.0.0.1:8000/user',values)
         .then((res) =>{
-            console.log(res)
+            console.log(res);
+            handleHasAccount(true);
         })
         .catch((err) => {
             console.log(err)
@@ -72,7 +73,7 @@ export function SignUp(){
 
     return (
         <div>
-            <SignUpForm  handleHasAccount={handleHasAccount } handleSignUpSubmit={handleSignUpSubmit} handleValsChange={handleValsChange}/>
+            <SignUpForm handleSignUpSubmit={handleSignUpSubmit} handleValsChange={handleValsChange}/>
             
         </div>
     );
