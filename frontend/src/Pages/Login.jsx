@@ -23,6 +23,28 @@ export function Login(){
     function handleLoginSubmit(e) {
         e.preventDefault();
         console.log("Logging in...");
+
+
+        axios.get('http://127.0.0.1:8000/user',values)
+        .then((res) =>{
+
+            if(res.data.success)
+            {
+                console.log(res.data);
+                handleIsLoggedIn(true)
+            }
+            
+            
+
+        })
+        .catch((err) => {
+            console.log(err)
+            alert(err)
+        }  
+        )
+
+        console.log("Logging Up...");
+        alert("Logging Up...");
     }
 
     
@@ -35,7 +57,6 @@ export function Login(){
         if(isLoggedIn == true)
         {
             return <Navigate to="/home" replace />;
-
         }
     
 
