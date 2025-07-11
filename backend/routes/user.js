@@ -4,7 +4,42 @@ const port = process.env.PORT || 8000;
 const userrouter = express.Router()
 
 userrouter.get("/",(req,res) =>{
-    res.send({data: "Here is your User Info"})
+
+    
+
+
+    const sql_statement = `SELECT * FROM USER WHERE username = ? AND password= ?`;
+
+    const values = [
+        req.body.username,
+        req.body.password,
+    ]
+
+     db.query(sql_statement,values, function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+        console.log(result)
+        if(result != NULL)
+        {
+            return res.json({success:"User loggged in successfully"})
+        }
+        else
+        {
+            return res.json({fail:"Student failed to login"})
+
+        }
+
+    }
+    
+    
+  })
+
+
 })
 
 
@@ -25,7 +60,7 @@ userrouter.post("/",(req,res) =>{
     db.query(sql_statement,values, function (err, result) {
     if (err) return res.json({message: 'Something unexpected has occured '+err})
     
-    return res.json({success:"Student added successfully"})
+    return res.json({success:"User added successfully"})
   })
     
 })

@@ -48,8 +48,16 @@ export function SignUp(){
         e.preventDefault();
         axios.post('http://127.0.0.1:8000/user',values)
         .then((res) =>{
-            console.log(res);
-            handleHasAccount(true);
+
+            if(res.data.success)
+            {
+                console.log(res.data);
+                handleHasAccount(true);
+
+            }
+            
+            
+
         })
         .catch((err) => {
             console.log(err)
