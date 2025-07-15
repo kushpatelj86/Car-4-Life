@@ -2,6 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import {LoginForm} from '../Components/LoginForm.jsx'
 import { Navigate } from 'react-router-dom'
+import axios from 'axios';
 
 
 
@@ -10,6 +11,25 @@ export function Login(){
 
     const [hasAccount, setHasAccount] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+    const [values,setValues] = useState(
+           { 
+            
+            username: '',
+            password: ''
+        }
+    )
+
+    const handleValsChange = e => {
+
+        const id = e.target.id;
+
+
+
+        setValues({...values, [id] : e.target.value});
+
+    
+    };
 
 
     function handleHasAccount(val){
@@ -24,8 +44,10 @@ export function Login(){
         e.preventDefault();
         console.log("Logging in...");
 
+        alert(values.username)
 
-        axios.get('http://127.0.0.1:8000/user',values)
+
+        axios.post('http://localhost:8000/user/login',values)
         .then((res) =>{
 
             if(res.data.success)
@@ -63,7 +85,7 @@ export function Login(){
 
     return (
         <div >
-            <LoginForm handleHasAccount={handleHasAccount } handleIsLoggedIn={handleIsLoggedIn} onSubmit={handleLoginSubmit}/>
+            <LoginForm handleHasAccount={handleHasAccount } onSubmit={handleLoginSubmit} handleValsChange={handleValsChange}/>
         </div>
 
     );

@@ -46,7 +46,7 @@ export function SignUp(){
 
     function handleSignUpSubmit(e) {
         e.preventDefault();
-        axios.post('http://127.0.0.1:8000/user',values)
+        axios.post('http://127.0.0.1:8000/user/signup',values)
         .then((res) =>{
 
             if(res.data.success)

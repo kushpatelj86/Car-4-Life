@@ -4,46 +4,17 @@ const port = process.env.PORT || 8000;
 const userrouter = express.Router()
 
 userrouter.get("/",(req,res) =>{
+    console.log("testing ");
+
+    res.send({data: "User retrieved"})
 
     
-
-
-    const sql_statement = `SELECT * FROM USER WHERE username = ? AND password= ?`;
-
-    const values = [
-        req.body.username,
-        req.body.password,
-    ]
-
-     db.query(sql_statement,values, function (err, result) {
-    if (err) 
-    {
-
-        return res.json({message: 'Something unexpected has occured '+err})
-    }
-    else
-    {
-        console.log(result)
-        if(result != NULL)
-        {
-            return res.json({success:"User loggged in successfully"})
-        }
-        else
-        {
-            return res.json({fail:"Student failed to login"})
-
-        }
-
-    }
-    
-    
-  })
 
 
 })
 
 
-userrouter.post("/",(req,res) =>{
+userrouter.post("/signup",(req,res) =>{
     const sql_statement = "INSERT INTO USER (`username`, `password`,`first_name`,`last_name`,`phone_number`,`email`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     console.log("req.body.username ",req.body.username );
 
@@ -62,6 +33,55 @@ userrouter.post("/",(req,res) =>{
     
     return res.json({success:"User added successfully"})
   })
+    
+})
+
+
+
+
+
+
+userrouter.post("/login",(req,res) =>{
+    console.log("testing ");
+
+
+    
+
+
+    const sql_statement = `SELECT * FROM USER WHERE username = ? AND password= ?`;
+
+    const values = [
+        req.body.username,
+        req.body.password
+    ]
+    console.log(req.body.username)
+    console.log(req.body.password)
+
+
+     db.query(sql_statement,values, function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+        console.log(result)
+        if(result.length !== 0)
+        {
+            return res.json({success:"User loggged in successfully"})
+        }
+        else
+        {
+            return res.json({fail:"Student failed to login"})
+
+        }
+
+    }
+    
+    
+  })
+
     
 })
 
