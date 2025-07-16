@@ -52,7 +52,13 @@ export function Login(){
 
             if(res.data.success)
             {
-                console.log(res.data);
+                alert(res.data.success)
+                localStorage.setItem("currentUser", JSON.stringify({
+                username: values.username,
+                email: values.email,
+                role: values.role
+                }));    
+
                 handleIsLoggedIn(true)
             }
             

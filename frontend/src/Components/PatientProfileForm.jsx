@@ -84,8 +84,8 @@ export function PatientProfileForm(props){
                 
                 <br/><br/>
 
-                <label htmlFor="dietary-choice">Dietary Choice</label>
-                <input type="text" id="dietary-choice" name="dietary-choice"/><br/><br/>
+                <label htmlFor="dietary_choice">Dietary Choice</label>
+                <input type="text" id="dietary_choice" name="dietary_choice"/><br/><br/>
 
                 <label htmlFor="height">Height</label>
                 <input type="number" id="height" name="height"/><br/><br/>
@@ -106,8 +106,8 @@ export function PatientProfileForm(props){
                     <option value="gain">Gain</option>
                 </select>
 
-                <label htmlFor="activity-level">Activity Level</label>
-                 <select id="activity-level" name="activity-level">
+                <label htmlFor="activity_level">Activity Level</label>
+                 <select id="activity_level" name="activity_level">
                     <option value="low">Low</option>
                     <option value="moderate">Moderate</option>
                     <option value="high">High</option>

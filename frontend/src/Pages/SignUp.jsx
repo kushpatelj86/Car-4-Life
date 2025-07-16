@@ -52,7 +52,15 @@ export function SignUp(){
             if(res.data.success)
             {
                 console.log(res.data);
+                alert(res.data)
+                localStorage.setItem("currentUser", JSON.stringify({
+                username: values.username,
+                email: values.email,
+                role: values.role
+                }));                
+                
                 handleHasAccount(true);
+
 
             }
             

@@ -18,12 +18,40 @@ export function Profile(){
 
     const [changeProfile, setChangeProfile] = useState(false);
 
+    const [currentUser, setCurrentUser] = useState([]);
+
+
+
+
+    function handleCurrentUser(event){
+            event.preventDefault();
+            setCurrentUser(localStorage.getItem("currentUser"));
+        }
+
+
+
+
+
+      const [data, setData] = useState([]);
+
+
+        function handleValsChange(event){
+            event.preventDefault()
+        }
+
+
+
+
 
     function handleChangeProfile(event){
         event.preventDefault()
 
         setChangeProfile(!changeProfile);
     }
+
+
+
+
 
     return (
 
