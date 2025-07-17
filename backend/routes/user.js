@@ -6,7 +6,49 @@ const userrouter = express.Router()
 userrouter.get("/",(req,res) =>{
     console.log("testing ");
 
+
     res.send({data: "User retrieved"})
+
+    
+
+
+})
+
+
+userrouter.get("/get_user/:username",(req,res) =>{
+    console.log("testing /get_user:username");
+    const username = req.params.username;
+    console.log("Username ", username)
+
+
+    const sql_statement = "SELECT * FROM USER WHERE `username` = ?";
+
+    db.query(sql_statement,[username], function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+        console.log(result)
+        if(result.length !== 0)
+        {
+            return res.json({success:"User data retrieved succesffuly"})
+        }
+        else
+        {
+            return res.json({fail:"User data failed to be retrieved"})
+
+        }
+
+    }
+    
+    
+  })
+
+
+
 
     
 

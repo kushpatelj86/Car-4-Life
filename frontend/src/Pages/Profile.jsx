@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import profileImage from "./Images/defaultprofileicon.png"
 import './Styles/Profile.css'
 import {UpdateList} from '../Components/UpdateList.jsx'
+import axios from 'axios';
 
 function updatePhoto(){
     let profilePic = document.getElementById('profile-pic');
@@ -20,13 +21,38 @@ export function Profile(){
 
     const [currentUser, setCurrentUser] = useState([]);
 
+           
+
+    const handleCurrentUserChange = e => {
+
+        const user = JSON.parse(localStorage.getItem("currentUser"));
 
 
 
-    function handleCurrentUser(event){
-            event.preventDefault();
-            setCurrentUser(localStorage.getItem("currentUser"));
-        }
+
+        setCurrentUser(user);
+
+    
+    };
+
+    
+
+     useEffect(() => {
+        handleCurrentUserChange(event);
+    }, []);
+
+
+    useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/user/get_user/${currentUser.username}`)
+      .then((res) => {
+        
+      })
+      .catch((err) => console.log(err));
+  }, [currentUser]);
+
+    
+        
 
 
 

@@ -54,9 +54,7 @@ export function Login(){
             {
                 alert(res.data.success)
                 localStorage.setItem("currentUser", JSON.stringify({
-                username: values.username,
-                email: values.email,
-                role: values.role
+                username: values.username
                 }));    
 
                 handleIsLoggedIn(true)
