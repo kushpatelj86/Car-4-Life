@@ -46,7 +46,11 @@ export function Profile(){
     axios
       .get(`http://127.0.0.1:8000/user/get_user/${currentUser.username}`)
       .then((res) => {
-        
+        if(res.data.user)
+        {
+        alert(res.data.user.username)
+
+        }
       })
       .catch((err) => console.log(err));
   }, [currentUser]);

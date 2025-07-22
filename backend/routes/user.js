@@ -31,10 +31,12 @@ userrouter.get("/get_user/:username",(req,res) =>{
     }
     else
     {
-        console.log(result)
+                console.log("result")
+
+        console.log(result[0])
         if(result.length !== 0)
         {
-            return res.json({success:"User data retrieved succesffuly"})
+            return res.json({user : (result[0]) })
         }
         else
         {
