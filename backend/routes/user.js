@@ -83,8 +83,8 @@ userrouter.post("/signup",(req,res) =>{
 
 
 
-userrouter.post("/update_user/:user_id", (req, res) => {
-  const id = req.params.id;
+userrouter.post("user/update_user/:user_id", (req, res) => {
+  const id = req.params.user_id;
   const sql =
     "UPDATE USER SET `username`=?, `email`=?, `age`=?, `gender`=? WHERE user_id=?";
   const values = [

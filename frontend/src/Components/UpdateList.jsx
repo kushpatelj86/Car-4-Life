@@ -11,15 +11,9 @@ import { Navigate } from 'react-router-dom'
 import axios from 'axios';
 
 export function UpdateList(props){
-    const [values, setValues] = useState({
-        first_name: '',
-        last_name: '',
-        username: '',
-        password: '',
-        user_id: '',
-        phone_number: '',
-        email: ''
-    });
+    const [values, setValues] = useState(props.data);
+
+
 
     const handleValsChange = e => {
         const id = e.target.id;
@@ -28,8 +22,8 @@ export function UpdateList(props){
 
     const handlePatientSubmit = e => {
         e.preventDefault();
-        console.log(values);
-        axios.post(`http://localhost:8000/update_user/${user_id}`, values)
+        console.log("Values ", values);
+        axios.post(`http://localhost:8000/user/update_user/${values.uid}`, values)
         .then(res => {
             if (res.data.success) {
             alert(res.data.success);

@@ -29,6 +29,7 @@ export function Profile(){
         phone : '',
         email : '',
         role : '',
+        uid : ''
 
 });
         
@@ -64,7 +65,8 @@ export function Profile(){
             lname : res.data.user.last_name,
             phone :  res.data.user.phone_number,
             email :  res.data.user.phone,
-            role :  res.data.user.role
+            role :  res.data.user.role,
+            uid : res.data.user.user_id
 
            }
         
@@ -146,7 +148,7 @@ export function Profile(){
 
             <div id="profile-change">
                 {changeProfile ? 
-                <UpdateList handleChangeAcount={handleChangeProfile} />: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
+                <UpdateList handleChangeAcount={handleChangeProfile} data={data}/>: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
             </div>
         </div>
     );
