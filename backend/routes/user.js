@@ -83,6 +83,30 @@ userrouter.post("/signup",(req,res) =>{
 
 
 
+userrouter.post("/update_user/:user_id", (req, res) => {
+  const id = req.params.id;
+  const sql =
+    "UPDATE USER SET `username`=?, `email`=?, `age`=?, `gender`=? WHERE user_id=?";
+  const values = [
+    req.body.name,
+    req.body.email,
+    req.body.age,
+    req.body.gender,
+    id,
+  ];
+  db.query(sql, values, (err, result) => {
+    if (err)
+      return res.json({ message: "Something unexpected has occured" + err });
+    return res.json({ success: "Student updated successfully" });
+  });
+});
+
+
+
+
+
+
+
 
 
 userrouter.post("/login",(req,res) =>{

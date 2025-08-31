@@ -20,8 +20,18 @@ export function Profile(){
     const [changeProfile, setChangeProfile] = useState(false);
 
     const [currentUser, setCurrentUser] = useState([]);
+    const [username, setUsername] = useState([]);
 
-           
+    const [data, setData] = useState({
+        uname : '',
+        fname : '',
+        lname : '',
+        phone : '',
+        email : '',
+        role : '',
+
+});
+        
 
     const handleCurrentUserChange = e => {
 
@@ -48,7 +58,19 @@ export function Profile(){
       .then((res) => {
         if(res.data.user)
         {
-        alert(res.data.user.username)
+           alert(res.data.user.first_name);
+           setData({
+            fname : res.data.user.first_name,
+            lname : res.data.user.last_name,
+            phone :  res.data.user.phone_number,
+            email :  res.data.user.phone,
+            role :  res.data.user.role
+
+           }
+        
+           )
+
+
 
         }
       })
@@ -62,7 +84,6 @@ export function Profile(){
 
 
 
-      const [data, setData] = useState([]);
 
 
         function handleValsChange(event){
@@ -105,8 +126,8 @@ export function Profile(){
 
             <div className="profile-information">
                 <ul>
-                    <li>Name: </li>
-                    <li>Username: </li>
+                    <li>Name: {data.fname} {data.lname}</li>
+                    <li>Username: {currentUser.username}</li>
                     <li>Dietary Choice: </li>
                     <li>Height: </li>
                     <li>Weight: </li>
@@ -117,7 +138,7 @@ export function Profile(){
                     <li>Health Issues: </li>
                     <li>Nuerodivergence: </li>
                     <li>Drug History: </li>
-                    <li>Role: </li>
+                    <li>Role: {data.role}</li>
 
                 </ul>
             </div>

@@ -52,69 +52,30 @@ import "./Styles/PatientProfileForm.css"
 
 
 */
-
-export function PatientProfileForm(props){
-
-
-
+export function PatientProfileForm({ values, handleValsChange, handlePatientSubmit }) {
     return (
         <div>
-            <form onSubmit={props.onSubmit} id='patient-profile-form'>
+            <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
 
                 <label htmlFor="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name"/><br/><br/>
+                <input type="text" id="first_name" name="first_name" value={values.first_name} onChange={handleValsChange} /><br/><br/>
                 
                 <label htmlFor="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name"/><br/><br/>
+                <input type="text" id="last_name" name="last_name" value={values.last_name} onChange={handleValsChange} /><br/><br/>
             
                 <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username"/><br/><br/>
+                <input type="text" id="username" name="username" value={values.username} onChange={handleValsChange} /><br/><br/>
 
                 <label htmlFor="user_id">User Id</label>
-                <input type="number" id="user_id" name="user_id"/><br/><br/>
+                <input type="number" id="user_id" name="user_id" value={values.user_id} onChange={handleValsChange} /><br/><br/>
 
                 <label htmlFor="phone_number">Phone Number</label>
-                <input type="tel" id="phone_number" name="phone_number"/><br/><br/>
+                <input type="tel" id="phone_number" name="phone_number" value={values.phone_number} onChange={handleValsChange} /><br/><br/>
                 
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email"/><br/><br/>
-                
-                
-                
-                
-                <br/><br/>
+                <input type="email" id="email" name="email" value={values.email} onChange={handleValsChange} /><br/><br/>
 
-                <label htmlFor="dietary_choice">Dietary Choice</label>
-                <input type="text" id="dietary_choice" name="dietary_choice"/><br/><br/>
-
-                <label htmlFor="height">Height</label>
-                <input type="number" id="height" name="height"/><br/><br/>
-
-                <label htmlFor="weight">Weight</label>
-                <input type="number" id="weight" name="weight"/><br/><br/>
-
-                <label htmlFor="age">Age</label>
-                <input type="number" id="age" name="age"/><br/><br/>
-
-                <label htmlFor="religion">Religion</label>
-                <input type="text" id="religion" name="religion"/><br/><br/>
-
-                <label htmlFor="goal">Goal</label>
-                <select id="goal" name="goal">
-                    <option value="lose">Lose</option>
-                    <option value="maintain">Maintain</option>
-                    <option value="gain">Gain</option>
-                </select>
-
-                <label htmlFor="activity_level">Activity Level</label>
-                 <select id="activity_level" name="activity_level">
-                    <option value="low">Low</option>
-                    <option value="moderate">Moderate</option>
-                    <option value="high">High</option>
-                </select>
-
-                
-                <button type="submit" onClick={props.handleChangeAcount}>Update Profile</button>
+                <button type="submit">Update Profile</button>
             </form>
         </div>
     );
