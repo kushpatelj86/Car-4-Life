@@ -87,47 +87,82 @@ userrouter.post("/update_user/:user_id", (req, res) => {
   console.log("Update called")
   const vals = []
   const fields = []
-
-   console.log("Params:", req.params)
+  
+  let erroroccured = false
+  console.log("Params:", req.params)
   console.log("Body:", req.body)
 
-  const sql = "UPDATE USER SET";
 
   if(req.body.fname){
+
     vals.push(req.body.fname)
     fields.push('`first_name`=?')
+
+
+    let sql = "UPDATE USER SET `first_name`=? WHERE user_id=?";
+
+
+    db.query(sql, [req.body.fname, req.params.user_id], (err, result) => {
+    if (err)
+    {
+     erroroccured = true;
+
+    }
+
+    
+    });
   }
 
-  if(req.body.lname){
-    vals.push(req.body.lname)
+  if(req.body.last_name){
+    console.log("query being called")
+    vals.push(req.body.last_name)
     fields.push('`last_name`=?')
+
+    let sql = "UPDATE USER SET `last_name`=? WHERE user_id=?";
+
+    db.query(sql, [req.body.last_name, req.params.user_id], (err, result) => {
+    if (err)
+    {
+      erroroccured = true;
+
+    }
+    
+    });
   }
 
   if(req.body.phone){
     vals.push(req.body.phone)
     fields.push("`phone_number`=?")
+
+
+    let sql = "UPDATE USER SET `phone_number`=? WHERE user_id=?";
+
+    db.query(sql, [req.body.phone, req.params.user_id], (err, result) => {
+    if (err)
+    {
+           erroroccured = true;
+
+
+    }
+    
+    });
   }
 
-  sql += fields.join(', ') + " WHERE user_id=?";
 
-vals.push(req.params.user_id); // Assuming user_id is in params
+  vals.push(req.params.user_id); // Assuming user_id is in params
 
-
-
-
-  /*const sql =
-    "UPDATE USER SET `username`=?, `email`=?, `age`=?, `gender`=? WHERE user_id=?";*/
-  const values = [
-    req.body.name,
-    req.body.email,
-    req.body.age,
-    req.body.gender,
-  ];
-  db.query(sql, values, (err, result) => {
-    if (err)
-      return res.json({ message: "Something unexpected has occured" + err });
+  if(erroroccured)
+  {
+    return res.json({ message: "Error updating user: " + err });
+  }
+  else
+  {
+    console.log("Being returned")
     return res.json({ success: "Student updated successfully" });
-  });
+
+  }
+
+
 });
 
 
@@ -145,7 +180,7 @@ userrouter.post("/login",(req,res) =>{
     
 
 
-    const sql_statement = `SELECT * FROM USER WHERE username = ? AND password= ?`;
+    let sql_statement = `SELECT * FROM USER WHERE username = ? AND password= ?`;
 
     const values = [
         req.body.username,

@@ -56,22 +56,22 @@ export function PatientProfileForm({ values, handleValsChange, handlePatientSubm
     return (
         <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
             <label htmlFor="first_name">First Name</label>
-            <input type="text" id="first_name" value={values.first_name || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="text" id="first_name"  onChange={handleValsChange} /><br/><br/>
             
             <label htmlFor="last_name">Last Name</label>
-            <input type="text" id="last_name" value={values.last_name || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="text" id="last_name"  onChange={handleValsChange} /><br/><br/>
 
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" value={values.username || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="text" id="username"  onChange={handleValsChange} /><br/><br/>
 
             <label htmlFor="uid">User Id</label>
-            <input type="number" id="uid" value={values.uid || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="number" id="uid"  onChange={handleValsChange} /><br/><br/>
 
             <label htmlFor="phone_number">Phone Number</label>
-            <input type="tel" id="phone_number" value={values.phone_number || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="tel" id="phone_number"  onChange={handleValsChange} /><br/><br/>
             
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={values.email || ''} onChange={handleValsChange} /><br/><br/>
+            <input type="email" id="email"  onChange={handleValsChange} /><br/><br/>
 
             <button type="submit">Update Profile</button>
         </form>

@@ -12,7 +12,8 @@ import { Navigate } from 'react-router-dom'
 import axios from 'axios';
 
 export function UpdateList(props){
-    const [values, setValues] = useState(props.data);
+    const [values, setValues] = useState();
+    const [userId, setUserId] = useState(props.data.uid);
 
 
 
@@ -23,10 +24,11 @@ export function UpdateList(props){
 
     const handlePatientSubmit = async e => {
         e.preventDefault();
-        console.log("Values ", values.uid);
+        console.log("Values ",userId);
         
-        let data = await updateUser(values.uid, values);
+        let data = await updateUser(userId, values);
     };
+
 
     return (
         <ul>
@@ -37,7 +39,6 @@ export function UpdateList(props){
                     handlePatientSubmit={handlePatientSubmit} 
                 />
             </li>
-            <li><UserForm handleValsChange={handleValsChange} /></li>
             <li><HealthIssueForm/></li>
             <li><NuerodivergenceForm/></li>
         </ul>
