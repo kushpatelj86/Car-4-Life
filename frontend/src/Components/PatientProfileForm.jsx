@@ -54,29 +54,26 @@ import "./Styles/PatientProfileForm.css"
 */
 export function PatientProfileForm({ values, handleValsChange, handlePatientSubmit }) {
     return (
-        <div>
-            <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
-
-                <label htmlFor="first_name">First Name</label>
-                <input type="text" id="first_name" name="first_name" value={values.first_name} onChange={handleValsChange} /><br/><br/>
-                
-                <label htmlFor="last_name">Last Name</label>
-                <input type="text" id="last_name" name="last_name" value={values.last_name} onChange={handleValsChange} /><br/><br/>
+        <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
+            <label htmlFor="first_name">First Name</label>
+            <input type="text" id="first_name" value={values.first_name || ''} onChange={handleValsChange} /><br/><br/>
             
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" value={values.username} onChange={handleValsChange} /><br/><br/>
+            <label htmlFor="last_name">Last Name</label>
+            <input type="text" id="last_name" value={values.last_name || ''} onChange={handleValsChange} /><br/><br/>
 
-                <label htmlFor="user_id">User Id</label>
-                <input type="number" id="user_id" name="user_id" value={values.user_id} onChange={handleValsChange} /><br/><br/>
+            <label htmlFor="username">Username</label>
+            <input type="text" id="username" value={values.username || ''} onChange={handleValsChange} /><br/><br/>
 
-                <label htmlFor="phone_number">Phone Number</label>
-                <input type="tel" id="phone_number" name="phone_number" value={values.phone_number} onChange={handleValsChange} /><br/><br/>
-                
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" value={values.email} onChange={handleValsChange} /><br/><br/>
+            <label htmlFor="uid">User Id</label>
+            <input type="number" id="uid" value={values.uid || ''} onChange={handleValsChange} /><br/><br/>
 
-                <button type="submit">Update Profile</button>
-            </form>
-        </div>
+            <label htmlFor="phone_number">Phone Number</label>
+            <input type="tel" id="phone_number" value={values.phone_number || ''} onChange={handleValsChange} /><br/><br/>
+            
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={values.email || ''} onChange={handleValsChange} /><br/><br/>
+
+            <button type="submit">Update Profile</button>
+        </form>
     );
 }

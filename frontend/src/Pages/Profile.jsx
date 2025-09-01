@@ -2,6 +2,9 @@ import { useState,useEffect } from "react";
 import profileImage from "./Images/defaultprofileicon.png"
 import './Styles/Profile.css'
 import {UpdateList} from '../Components/UpdateList.jsx'
+import {updateUser} from '../api/user.js'
+import { getUser } from "../api/user.js";
+
 import axios from 'axios';
 
 function updatePhoto(){
@@ -53,34 +56,33 @@ export function Profile(){
     }, []);
 
 
-    useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/user/get_user/${currentUser.username}`)
-      .then((res) => {
-        if(res.data.user)
-        {
-           alert(res.data.user.first_name);
-           setData({
-            fname : res.data.user.first_name,
-            lname : res.data.user.last_name,
-            phone :  res.data.user.phone_number,
-            email :  res.data.user.phone,
-            role :  res.data.user.role,
-            uid : res.data.user.user_id
 
-           }
-        
-           )
+    async function fetchData() {
+      var user = await getUser(currentUser.username);
+      if (user) {
+        setData({
+          fname: user.first_name,
+          lname: user.last_name,
+          phone: user.phone_number,
+          email: user.phone,
+          role: user.role,
+          uid: user.user_id
+        });
+      }
+    }
 
 
+ useEffect(function() {
+    if (!currentUser || !currentUser.username) return;
 
-        }
-      })
-      .catch((err) => console.log(err));
+   
+
+    fetchData();
   }, [currentUser]);
 
+
     
-        
+
 
 
 
@@ -148,7 +150,7 @@ export function Profile(){
 
             <div id="profile-change">
                 {changeProfile ? 
-                <UpdateList handleChangeAcount={handleChangeProfile} data={data}/>: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
+                <UpdateList handleChangeAcount={handleChangeProfile} data={data} updateUser={updateUser}/>: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
             </div>
         </div>
     );

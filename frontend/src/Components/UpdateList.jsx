@@ -6,6 +6,7 @@ import {UserForm} from '../Components/UserForm.jsx'
 import {HealthIssueForm} from '../Components/HealthIssueForm.jsx'
 import {PatientProfileForm} from '../Components/PatientProfileForm.jsx'
 import {NuerodivergenceForm} from '../Components/NuerodivergenceForm.jsx'
+import { getUser, updateUser } from "../api/user.js";
 
 import { Navigate } from 'react-router-dom'
 import axios from 'axios';
@@ -20,19 +21,12 @@ export function UpdateList(props){
         setValues({...values, [id]: e.target.value});
     };
 
-    const handlePatientSubmit = e => {
+    const handlePatientSubmit = async e => {
         e.preventDefault();
-        console.log("Values ", values);
-        axios.post(`http://localhost:8000/user/update_user/${values.uid}`, values)
-        .then(res => {
-            if (res.data.success) {
-            alert(res.data.success);
-            } else {
-            alert(res.data.message);
-            }
-        })
-        .catch(err => console.log(err));
-            };
+        console.log("Values ", values.uid);
+        
+        let data = await updateUser(values.uid, values);
+    };
 
     return (
         <ul>

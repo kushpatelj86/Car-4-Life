@@ -83,16 +83,45 @@ userrouter.post("/signup",(req,res) =>{
 
 
 
-userrouter.post("user/update_user/:user_id", (req, res) => {
-  const id = req.params.user_id;
-  const sql =
-    "UPDATE USER SET `username`=?, `email`=?, `age`=?, `gender`=? WHERE user_id=?";
+userrouter.post("/update_user/:user_id", (req, res) => {
+  console.log("Update called")
+  const vals = []
+  const fields = []
+
+   console.log("Params:", req.params)
+  console.log("Body:", req.body)
+
+  const sql = "UPDATE USER SET";
+
+  if(req.body.fname){
+    vals.push(req.body.fname)
+    fields.push('`first_name`=?')
+  }
+
+  if(req.body.lname){
+    vals.push(req.body.lname)
+    fields.push('`last_name`=?')
+  }
+
+  if(req.body.phone){
+    vals.push(req.body.phone)
+    fields.push("`phone_number`=?")
+  }
+
+  sql += fields.join(', ') + " WHERE user_id=?";
+
+vals.push(req.params.user_id); // Assuming user_id is in params
+
+
+
+
+  /*const sql =
+    "UPDATE USER SET `username`=?, `email`=?, `age`=?, `gender`=? WHERE user_id=?";*/
   const values = [
     req.body.name,
     req.body.email,
     req.body.age,
     req.body.gender,
-    id,
   ];
   db.query(sql, values, (err, result) => {
     if (err)
