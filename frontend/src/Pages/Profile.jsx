@@ -132,6 +132,7 @@ export function Profile(){
                 <ul>
                     <li>Name: {data.fname} {data.lname}</li>
                     <li>Username: {currentUser.username}</li>
+                    <li>User Id: {data.uid}</li>
                     <li>Dietary Choice: </li>
                     <li>Height: </li>
                     <li>Weight: </li>

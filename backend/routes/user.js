@@ -93,16 +93,16 @@ userrouter.post("/update_user/:user_id", (req, res) => {
   console.log("Body:", req.body)
 
 
-  if(req.body.fname){
+  if(req.body.first_name){
 
-    vals.push(req.body.fname)
+    vals.push(req.body.first_name)
     fields.push('`first_name`=?')
 
 
     let sql = "UPDATE USER SET `first_name`=? WHERE user_id=?";
 
 
-    db.query(sql, [req.body.fname, req.params.user_id], (err, result) => {
+    db.query(sql, [req.body.first_name, req.params.user_id], (err, result) => {
     if (err)
     {
      erroroccured = true;
@@ -130,14 +130,14 @@ userrouter.post("/update_user/:user_id", (req, res) => {
     });
   }
 
-  if(req.body.phone){
-    vals.push(req.body.phone)
+  if(req.body.phone_number){
+    vals.push(req.body.phone_number)
     fields.push("`phone_number`=?")
 
 
     let sql = "UPDATE USER SET `phone_number`=? WHERE user_id=?";
 
-    db.query(sql, [req.body.phone, req.params.user_id], (err, result) => {
+    db.query(sql, [req.body.phone_number, req.params.user_id], (err, result) => {
     if (err)
     {
            erroroccured = true;
