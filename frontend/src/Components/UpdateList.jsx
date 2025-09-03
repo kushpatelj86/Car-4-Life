@@ -4,7 +4,6 @@ import { useState } from 'react'
 import React from 'react'
 import {UserForm} from '../Components/UserForm.jsx'
 import {HealthIssueForm} from '../Components/HealthIssueForm.jsx'
-import {PatientProfileForm} from '../Components/PatientProfileForm.jsx'
 import {NuerodivergenceForm} from '../Components/NuerodivergenceForm.jsx'
 import { getUser, updateUser } from "../api/user.js";
 
@@ -33,12 +32,14 @@ export function UpdateList(props){
     return (
         <ul>
             <li>
-                <PatientProfileForm 
+                <UserForm 
                     values={values} 
                     handleValsChange={handleValsChange} 
                     handlePatientSubmit={handlePatientSubmit} 
                 />
             </li>
+
+
             <li><HealthIssueForm/></li>
             <li><NuerodivergenceForm/></li>
         </ul>

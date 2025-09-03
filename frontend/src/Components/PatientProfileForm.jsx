@@ -2,78 +2,44 @@ import { useState } from 'react'
 import React from 'react'
 import "./Styles/PatientProfileForm.css"
 
-
-/*
-
- const healthIssues = ['Diabetes', 'Heart Desiese', 'Cancer', 'Asthma',
-        'Arhirtus','High Cholesterol','Obesity','Rashes','Acne','Dermatitis',
-    'High Blood Pressure','Stress','Back Pain','None']
-
-    const neurodivergence = ['Autism', 'ADHD', 'Bipolar', 'Asthma',
-        'OCD','Depression','Anxiety','PTSD','Down Syndromw','Nuerotypical']
-
-
-    const drughistory = ['Smoker','Alcoholic','Drug Abuse','Vaper', 'None']
-
-<label htmlFor="health-issues">Health Issues</label>
-                {
-                healthIssues.map((val)=>
-                (
-                     
-                    <div key={val}>
-                        <input type="checkbox" id={`health-issues-${val.replace(/ /g,"_")}`} name="health-issues" value={val} />
-                        <label htmlFor="health-issues">{val}</label>
-                    </div>
-                ))}
-
-
-
- <label htmlFor="neurodivergence">Neurodivergence</label>
-                {neurodivergence.map((val)=>
-                (
-                    
-                    <div key={val}>
-                        <input type="checkbox" id={`neurodivergence-${val.replace(/ /g,"_")}`} name="neurodivergence" value={val} />
-                        <label htmlFor="neurodivergence">{val}</label>
-                    </div>
-
-                ))}
-
-
-                <label htmlFor="drug-history">Drug History</label>
-                {drughistory.map((val)=>
-                (
-                    <div key={val}>
-                        <input type="checkbox" id={`drug-history-${val.replace(/ /g,"_")}`} name="drug-history" value={val} />
-                        <label htmlFor="drug-history">{val}</label>
-                        </div>
-  
-                ))}
-
-
-*/
-export function PatientProfileForm({ values, handleValsChange, handlePatientSubmit }) {
+export function PatientProfileForm(props){
     return (
-        <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
-            <label htmlFor="first_name">First Name</label>
-            <input type="text" id="first_name"  onChange={handleValsChange} /><br/><br/>
-            
-            <label htmlFor="last_name">Last Name</label>
-            <input type="text" id="last_name"  onChange={handleValsChange} /><br/><br/>
+        <div>
+            <form onSubmit={props.onSubmit} id='patient-profile-form'>
 
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username"  onChange={handleValsChange} /><br/><br/>
+                <label htmlFor="dietary-choice">Dietary Choice</label>
+                <input type="text" id="health-issue" name="health-issue"/><br/><br/>
 
-            <label htmlFor="uid">User Id</label>
-            <input type="number" id="uid"  onChange={handleValsChange} /><br/><br/>
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" step="0.01" min="0" max="999.99" required/>
 
-            <label htmlFor="phone_number">Phone Number</label>
-            <input type="tel" id="phone_number"  onChange={handleValsChange} /><br/><br/>
-            
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email"  onChange={handleValsChange} /><br/><br/>
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="0.01" min="0" max="999.99" required/>
 
-            <button type="submit">Update Profile</button>
-        </form>
+                
+                <label htmlFor="age">Age</label>
+                <input type="number" id="age" name="age"/><br/><br/>
+
+               
+                <label htmlFor="religion">Religion</label>
+                <input type="text" id="religion" name="religion"/><br/><br/>
+
+                <label for="goal">Goal:</label>
+                <select id="goal" name="goal">
+                    <option value="Lose">Lose</option>
+                    <option value="Maintain">Maintain</option>
+                    <option value="Gain">Gain</option>
+                </select>
+
+                <label for="activity-level">Activity Level:</label>
+                <select id="activity-level" name="activity-level">
+                    <option value="Low">Low</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="High">High</option>
+                </select>
+
+                <button type="submit" onClick={props.handleChangeAcount}>Add Health Issue</button>
+            </form>
+        </div>
     );
 }
