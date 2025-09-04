@@ -9,6 +9,7 @@ import { getUser, updateUser } from "../api/user.js";
 
 import { Navigate } from 'react-router-dom'
 import axios from 'axios';
+import { PatientProfileForm } from './PatientProfileForm.jsx'
 
 export function UpdateList(props){
     const [values, setValues] = useState();
@@ -39,6 +40,7 @@ export function UpdateList(props){
                 />
             </li>
 
+            <li><PatientProfileForm/></li>
 
             <li><HealthIssueForm/></li>
             <li><NuerodivergenceForm/></li>

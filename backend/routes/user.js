@@ -51,10 +51,6 @@ userrouter.get("/get_user/:username",(req,res) =>{
 
 
 
-
-    
-
-
 })
 
 
@@ -226,6 +222,55 @@ userrouter.put("/",(req,res) =>{
 userrouter.delete("/",(req,res) =>{
     res.send({data: "User deleted"})
 })
+
+
+
+
+
+userrouter.get("/get_profile/:user_id",(req,res) =>{
+    console.log("/get_profile/:user_id");
+    const username = req.params.username;
+    console.log("Username ", username)
+
+
+    const sql_statement = "SELECT * FROM USER WHERE `username` = ?";
+
+    db.query(sql_statement,[username], function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+                console.log("result")
+
+        console.log(result[0])
+        if(result.length !== 0)
+        {
+            return res.json({user : (result[0]) })
+        }
+        else
+        {
+            return res.json({fail:"User data failed to be retrieved"})
+
+        }
+
+    }
+    
+    
+  })
+
+
+
+})
+
+
+
+
+
+
+
 
 
 export default userrouter;
