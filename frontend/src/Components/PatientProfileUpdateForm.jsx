@@ -2,7 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import "./Styles/PatientProfileForm.css"
 
-export function PatientProfileForm(props){
+export function PatientProfileUpdateForm(props){
     return (
         <div>
             <form onSubmit={props.onSubmit} id='patient-profile-form'>

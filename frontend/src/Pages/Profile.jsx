@@ -4,8 +4,9 @@ import './Styles/Profile.css'
 import {UpdateList} from '../Components/UpdateList.jsx'
 import {updateUser} from '../api/user.js'
 import { getUser } from "../api/user.js";
-import {PatientProfileForm} from '../Components/PatientProfileForm.jsx'
+import {PatientProfileUpdateForm} from '../Components/PatientProfileUpdateForm.jsx'
 import { getProfile } from "../api/user.js";
+import {CreateList} from '../Components/CreateList.jsx'
 
 import axios from 'axios';
 
@@ -81,7 +82,7 @@ const [profile_data, setProfileData] = useState({
           phone: user.phone_number,
           email: user.phone,
           role: user.role,
-          uid: user.user_id
+          uid: Number(user.user_id)
         });
       }
     }
@@ -189,10 +190,19 @@ const [profile_data, setProfileData] = useState({
             </div>
 
 
-            <div id="profile-change">
-                {changeProfile ? 
-                <UpdateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser}/>: <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>}
-            </div>
+           <div id="profile-change">
+  {changeProfile ? (
+    <>
+        <h1>Update Information</h1>
+
+      <UpdateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />
+      <h1>Create Information</h1>
+      <CreateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />
+    </>
+  ) : (
+    <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>
+  )}
+</div>
         </div>
     );
 

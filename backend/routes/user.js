@@ -229,13 +229,13 @@ userrouter.delete("/",(req,res) =>{
 
 userrouter.get("/get_profile/:user_id",(req,res) =>{
     console.log("/get_profile/:user_id");
-    const username = req.params.username;
-    console.log("Username ", username)
+    const userid = Number(req.params.user_id);
+    console.log("userid ", typeof(userid))
 
 
-    const sql_statement = "SELECT * FROM USER WHERE `username` = ?";
+    const sql_statement = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
 
-    db.query(sql_statement,[username], function (err, result) {
+    db.query(sql_statement,[userid], function (err, result) {
     if (err) 
     {
 
@@ -260,6 +260,116 @@ userrouter.get("/get_profile/:user_id",(req,res) =>{
     
     
   })
+
+
+
+})
+
+
+
+
+
+
+userrouter.get("/create_profile/:user_id",(req,res) =>{
+    console.log("/create_profile/:user_id");
+    const userid = Number(req.params.user_id);
+    console.log("userid ", typeof(userid))
+
+
+    const sql_statement1 = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
+
+    let exists = false;
+
+    db.query(sql_statement1,[userid], function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+      if(result)
+      {
+        exists = true;
+      }
+      else
+      {
+        exists = false;
+
+      }
+    }
+
+    
+    
+  })
+
+
+  if(!exists)
+  {
+    
+  }
+
+
+
+
+
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+userrouter.get("/update_profile/:user_id",(req,res) =>{
+    console.log("/update_profile/:user_id");
+    const userid = Number(req.params.user_id);
+    console.log("userid ", typeof(userid))
+
+
+    const sql_statement1 = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
+
+    let exists = false;
+
+    db.query(sql_statement1,[userid], function (err, result) {
+    if (err) 
+    {
+
+        return res.json({message: 'Something unexpected has occured '+err})
+    }
+    else
+    {
+      if(result)
+      {
+        exists = true;
+      }
+      else
+      {
+        exists = false;
+
+      }
+    }
+
+    
+    
+  })
+
+
+  if(exists)
+  {
+      
+  }
+
+
+
+
+
 
 
 

@@ -9,9 +9,9 @@ import { getUser, updateUser } from "../api/user.js";
 
 import { Navigate } from 'react-router-dom'
 import axios from 'axios';
-import { PatientProfileUpdateForm } from '../Components/PatientProfileUpdateForm.jsx'
+import { PatientProfileCreateForm } from '../Components/PatientProfileCreateForm.jsx'
 
-export function UpdateList(props){
+export function CreateList(props){
     const [values, setValues] = useState();
     const [userId, setUserId] = useState(Number(props.user_data.uid));
 
@@ -32,18 +32,10 @@ export function UpdateList(props){
 
     return (
         <ul>
-            <li>
-                <UserUpdateForm 
-                    values={values} 
-                    handleValsChange={handleValsChange} 
-                    handlePatientSubmit={handlePatientSubmit} 
-                />
-            </li>
+            
+            <li><PatientProfileCreateForm/></li>
 
-            <li><PatientProfileUpdateForm/></li>
-
-            <li><HealthIssueForm/></li>
-            <li><NuerodivergenceForm/></li>
+            
         </ul>
     );
 }
