@@ -306,7 +306,17 @@ userrouter.get("/create_profile/:user_id",(req,res) =>{
 
   if(!exists)
   {
-    
+    const dietary_choice = req.body.dietary_choice;
+    const height = req.body.height;
+    const weight = req.body.weight;
+    const age = req.body.age;
+    const religion = req.body.religion;
+    const goal = req.body.goal;
+    const activity_level = req.body.activity_level;
+
+    const sql_statement2 = "INSERT INTO PATIENT_PROFILE (`dietary_choice`, `height`,`weight`,`age`,`religion`,`goal`,`activity_level`,`access_level` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+
   }
 
 

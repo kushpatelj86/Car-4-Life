@@ -46,3 +46,16 @@ export  async function  updatePatientProfile (profileData, values) {
     return null;
   }
 };
+
+
+
+export  async function  createPatientProfile (profileData, values) {
+  try {
+    console.log("/User id ",profileData)
+    const res = await axios.post(`http://localhost:8000/user/create_profile/${profileData}`, values);
+    return res.data;
+  } catch (err) {
+    console.error("Error updating user:", err);
+    return null;
+  }
+};

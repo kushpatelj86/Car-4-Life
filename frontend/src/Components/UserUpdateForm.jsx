@@ -52,9 +52,9 @@ import "./Styles/PatientProfileForm.css"
 
 
 */
-export function UserUpdateForm({ values, handleValsChange, handlePatientSubmit }) {
+export function UserUpdateForm({ user_values, handleValsChange, handleUserSubmit }) {
     return (
-        <form onSubmit={handlePatientSubmit} id='patient-profile-form'>
+        <form onSubmit={handleUserSubmit} id='patient-profile-form'>
             <label htmlFor="first_name">First Name</label>
             <input type="text" id="first_name"  onChange={handleValsChange} /><br/><br/>
             

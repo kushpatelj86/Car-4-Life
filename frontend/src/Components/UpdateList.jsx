@@ -12,21 +12,21 @@ import axios from 'axios';
 import { PatientProfileUpdateForm } from '../Components/PatientProfileUpdateForm.jsx'
 
 export function UpdateList(props){
-    const [values, setValues] = useState();
+    const [user_values, setUserValues] = useState();
     const [userId, setUserId] = useState(Number(props.user_data.uid));
 
 
 
     const handleValsChange = e => {
         const id = e.target.id;
-        setValues({...values, [id]: e.target.value});
+        setUserValues({...user_values, [id]: e.target.value});
     };
 
-    const handlePatientSubmit = async e => {
+    const handleUserSubmit = async e => {
         e.preventDefault();
-        console.log("Values ",userId);
+        console.log("user_values ",userId);
         
-        let data = await updateUser(userId, values);
+        let data = await updateUser(userId, user_values);
     };
 
 
@@ -34,9 +34,9 @@ export function UpdateList(props){
         <ul>
             <li>
                 <UserUpdateForm 
-                    values={values} 
+                    user_values={user_values} 
                     handleValsChange={handleValsChange} 
-                    handlePatientSubmit={handlePatientSubmit} 
+                    handleUserSubmit={handleUserSubmit} 
                 />
             </li>
 
