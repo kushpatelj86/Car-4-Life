@@ -5,7 +5,7 @@ import {UpdateList} from '../Components/UpdateList.jsx'
 import {updateUser} from '../api/user.js'
 import { getUser } from "../api/user.js";
 import {PatientProfileUpdateForm} from '../Components/PatientProfileUpdateForm.jsx'
-import { getProfile } from "../api/user.js";
+import { getOwnerProfile } from "../api/user.js";
 import {CreateList} from '../Components/CreateList.jsx'
 
 import axios from 'axios';
@@ -23,7 +23,7 @@ function updatePhoto(){
 
 export function OwnerProfile(){
 
-    const [changeProfile, setChangeProfile] = useState(false);
+    const [changeOwnerProfile, setChangeOwnerProfile] = useState(false);
 
     const [currentUser, setCurrentUser] = useState([]);
     const [username, setUsername] = useState([]);
@@ -90,11 +90,11 @@ const [profile_data, setProfileData] = useState({
 
 
 
-    async function fetchProfileData() {
+    async function fetchOwnerProfileData() {
 
         if(user_data.uid)
         {
-            var profile = await getProfile(user_data.uid);
+            var profile = await getOwnerProfile(user_data.uid);
             if (profile) {
                 setProfileData({
                 dietary_choice: user.dietary_choice,
@@ -122,7 +122,7 @@ const [profile_data, setProfileData] = useState({
 
   useEffect(function() {
     if (!user_data.uid) return;
-    fetchProfileData();
+    fetchOwnerProfileData();
   }, [user_data.uid]);
 
 
@@ -139,10 +139,10 @@ const [profile_data, setProfileData] = useState({
 
 
 
-    function handleChangeProfile(event){
+    function handleChangeOwnerProfile(event){
         event.preventDefault()
 
-        setChangeProfile(!changeProfile);
+        setChangeOwnerProfile(!changeOwnerProfile);
     }
 
 
@@ -174,7 +174,7 @@ const [profile_data, setProfileData] = useState({
                     <li>Name: {user_data.fname} {user_data.lname}</li>
                     <li>Username: {currentUser.username}</li>
                     <li>User Id: {user_data.uid}</li>
-                    <li>Phone: </li>
+                    <li>Phone: {user_data.phone}</li>
                     <li>Email: {user_data.email} </li>
                     <li>Address: </li>
                     <li>Access Level: </li>
@@ -185,16 +185,16 @@ const [profile_data, setProfileData] = useState({
 
 
            <div id="profile-change">
-  {changeProfile ? (
+  {changeOwnerProfile ? (
     <>
         <h1>Update Information</h1>
  
-      <UpdateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />
+      <UpdateList handleChangeAcount={handleChangeOwnerProfile} user_data={user_data} updateUser={updateUser} />
       <h1>Create Information</h1>
-      <CreateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />
+      <CreateList handleChangeAcount={handleChangeOwnerProfile} user_data={user_data} updateUser={updateUser} />
     </>
   ) : (
-    <button id="profile-change-button" onClick={handleChangeProfile}>Update Profile</button>
+    <button id="profile-change-button" onClick={handleChangeOwnerProfile}>Update Profile</button>
   )}
 </div>
         </div>

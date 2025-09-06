@@ -67,7 +67,7 @@ userrouter.post("/signup", (req, res) => {
         req.body.first_name,
         req.body.last_name,
         req.body.email,
-        req.body.role, // 'OWNER', 'MECHANIC', 'ADMIN', 'FLEET_MANAGER'
+        req.body.role, 
     ];
 
     db.query(sql_statement, values, function (err, result) {
@@ -269,64 +269,40 @@ userrouter.get("/get_profile/:user_id",(req,res) =>{
 
 
 
+userrouter.post("/create_profile/:user_id", (req, res) => {
+    const userId = Number(req.params.user_id);
 
-userrouter.get("/create_profile/:user_id",(req,res) =>{
-    console.log("/create_profile/:user_id");
-    const userid = Number(req.params.user_id);
-    console.log("userid ", typeof(userid))
+    const sqlCheck = "SELECT * FROM DRIVER_PROFILE WHERE user_id = ?";
 
+    db.query(sqlCheck, [userId], (err, result) => {
+        if (err) {
+            return res.json({ message: 'Something unexpected occurred: ' + err });
+        }
 
-    const sql_statement1 = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
+      
+        const sqlcommand1 = `
+            INSERT INTO DRIVER_PROFILE 
+            (phone_number, address, license_number, vehicle_type, experience_years, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    let exists = false;
+            const values = [
+        req.body.phone_number,
+        req.body.address,
+        req.body.license_number,
+        req.body.vehicle_type,
+        req.body.experience_years,
+        req.body.status
+    ]
 
-    db.query(sql_statement1,[userid], function (err, result) {
-    if (err) 
-    {
+        db.query(sqlcommand1, values, (err2, result2) => {
+            if (err2) {
+                return res.json({ message: 'Error saving driver profile: ' + err2 });
+            }
+            res.json({ message: "Driver profile created" });
+        });
+    });
+});
 
-        return res.json({message: 'Something unexpected has occured '+err})
-    }
-    else
-    {
-      if(result)
-      {
-        exists = true;
-      }
-      else
-      {
-        exists = false;
-
-      }
-    }
-
-    
-    
-  })
-
-
-  if(!exists)
-  {
-    const dietary_choice = req.body.dietary_choice;
-    const height = req.body.height;
-    const weight = req.body.weight;
-    const age = req.body.age;
-    const religion = req.body.religion;
-    const goal = req.body.goal;
-    const activity_level = req.body.activity_level;
-
-    const sql_statement2 = "INSERT INTO PATIENT_PROFILE (`dietary_choice`, `height`,`weight`,`age`,`religion`,`goal`,`activity_level`,`access_level` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-  }
-
-
-
-
-
-
-
-
-})
 
 
 

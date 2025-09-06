@@ -5,7 +5,7 @@ import {UpdateList} from '../Components/UpdateList.jsx'
 import {updateUser} from '../api/user.js'
 import { getUser } from "../api/user.js";
 import {PatientProfileUpdateForm} from '../Components/PatientProfileUpdateForm.jsx'
-import { getProfile } from "../api/user.js";
+import { getOwnerProfile } from "../api/user.js";
 import {CreateList} from '../Components/CreateList.jsx'
 
 import axios from 'axios';
@@ -94,7 +94,7 @@ const [profile_data, setProfileData] = useState({
 
         if(user_data.uid)
         {
-            var profile = await getProfile(user_data.uid);
+            var profile = await getOwnerProfile(user_data.uid);
             if (profile) {
                 setProfileData({
                 dietary_choice: user.dietary_choice,

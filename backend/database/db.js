@@ -27,9 +27,13 @@ const sqlStatements = [
     user_id INT PRIMARY KEY,
     phone_number VARCHAR(15),
     address VARCHAR(255),
+    license_number VARCHAR(50),
+    vehicle_type VARCHAR(50),
+    experience_years INT DEFAULT 0,
     access_level ENUM('Low','Medium','High') DEFAULT 'Low',
+    status ENUM('Active','Inactive') DEFAULT 'Active',
     FOREIGN KEY(user_id) REFERENCES USER(user_id)
-  )`,
+)`,
 
   `CREATE TABLE IF NOT EXISTS CAR (
     car_id INT AUTO_INCREMENT PRIMARY KEY,

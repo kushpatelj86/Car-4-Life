@@ -4,7 +4,7 @@ import { useState } from 'react'
 import React from 'react'
 import {UserUpdateForm} from './UserUpdateForm.jsx'
 import {HealthIssueForm} from '../Components/HealthIssueForm.jsx'
-import {NuerodivergenceForm} from '../Components/NuerodivergenceForm.jsx'
+import {OwnerProfileUpdateForm} from '../Components/OwnerProfileUpdateForm.jsx'
 import { getUser, updateUser } from "../api/user.js";
 
 import { Navigate } from 'react-router-dom'
@@ -15,6 +15,7 @@ export function UpdateList(props){
     const [user_values, setUserValues] = useState();
     const [userId, setUserId] = useState(Number(props.user_data.uid));
 
+    const [profile_values, setProfileValues] = useState();
 
 
     const handleValsChange = e => {
@@ -30,6 +31,9 @@ export function UpdateList(props){
     };
 
 
+    
+
+
     return (
         <ul>
             <li>
@@ -40,10 +44,9 @@ export function UpdateList(props){
                 />
             </li>
 
-            <li><PatientProfileUpdateForm/></li>
+            <li><OwnerProfileUpdateForm /></li>
 
-            <li><HealthIssueForm/></li>
-            <li><NuerodivergenceForm/></li>
+           
         </ul>
     );
 }

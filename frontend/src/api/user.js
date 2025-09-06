@@ -23,7 +23,7 @@ export  async function  updateUser (userData, values) {
 
 
 
-export  async function  getProfile(user_id)  {
+export  async function  getOwnerProfile(user_id)  {
   try {
     const res = await axios.get(`http://127.0.0.1:8000/user/get_profile/${user_id}`);
     return res.data.user;
@@ -36,7 +36,7 @@ export  async function  getProfile(user_id)  {
 
 
 
-export  async function  updatePatientProfile (profileData, values) {
+export  async function  updateOwnerProfile (profileData, values) {
   try {
     console.log("/User id ",profileData)
     const res = await axios.post(`http://localhost:8000/user/update_profile/${profileData}`, values);
@@ -49,7 +49,7 @@ export  async function  updatePatientProfile (profileData, values) {
 
 
 
-export  async function  createPatientProfile (profileData, values) {
+export  async function  createOwnerProfile (profileData, values) {
   try {
     console.log("/User id ",profileData)
     const res = await axios.post(`http://localhost:8000/user/create_profile/${profileData}`, values);

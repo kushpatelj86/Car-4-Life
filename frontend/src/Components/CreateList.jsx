@@ -5,35 +5,34 @@ import React from 'react'
 import {UserUpdateForm} from './UserUpdateForm.jsx'
 import {HealthIssueForm} from '../Components/HealthIssueForm.jsx'
 import {NuerodivergenceForm} from '../Components/NuerodivergenceForm.jsx'
-import { getUser, updateUser } from "../api/user.js";
+import { getUser, updateUser, createOwnerProfile } from "../api/user.js";
 
 import { Navigate } from 'react-router-dom'
 import axios from 'axios';
-import { PatientProfileCreateForm } from '../Components/PatientProfileCreateForm.jsx'
+import { OwnerProfileCreateForm } from './OwnerProfileCreateForm.jsx'
 
 export function CreateList(props){
-    const [values, setValues] = useState();
+    const [owner_values, setOwnerValues] = useState();
     const [userId, setUserId] = useState(Number(props.user_data.uid));
 
 
 
     const handleValsChange = e => {
         const id = e.target.id;
-        setValues({...values, [id]: e.target.value});
+        setOwnerValues({...owner_values, [id]: e.target.value});
     };
 
-    const handlePatientSubmit = async e => {
+   const handleOwnerProfileSubmit = async e => {
         e.preventDefault();
-        console.log("Values ",userId);
+        console.log("user_values ",userId);
         
-        let data = await updateUser(userId, values);
+        let data = await createOwnerProfile(userId, owner_values);
     };
-
 
     return (
         <ul>
             
-            <li><PatientProfileCreateForm/></li>
+            <li><OwnerProfileCreateForm owner_values={ owner_values}handleValsChange={handleValsChange} handleOwnerProfileSubmit={handleOwnerProfileSubmit}/></li>
 
             
         </ul>
