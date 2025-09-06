@@ -1,4 +1,4 @@
-export function MedicationRecommendations(){
+export function PredictiveAlerts(){
 
     return (
         <div id='medication-recommendations'>

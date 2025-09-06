@@ -1,39 +1,37 @@
 import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './Pages/Home';
-import { About } from './Pages/About';
 import { CarProfile } from './Pages/CarProfile';
 import { ServiceRecords } from './Pages/ServiceRecords';
 import { PredictiveAlerts } from './Pages/PredictiveAlerts';
-import { CarHealth } from './Pages/CarHealth';
 import { Appointment } from './Pages/Appointment';
-import { MechanicRating } from './Pages/MechanicRating';
-import { Notifications } from './Pages/Notifications';
-import { Admin } from './Pages/Admin';
-import { Layout } from './Components/Layout';
 import { Login } from './Pages/Login';
 import { SignUp } from './Pages/SignUp';
+import { OwnerProfile } from './Pages/OwnerProfile';
+import { Parts } from './Pages/Parts';
+import { ServiceParts } from './Pages/ServiceParts';
+import { Reminders } from './Pages/Reminders';
+import { Layout } from './Components/Layout';
+import { CarScore } from './Pages/CarScore'; // New page for displaying scores
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route>
-          <Route path="/" element={<Login />} />
-          <Route path="sign-up" element={<SignUp />} />
-        </Route>
+        <Route path="/" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
 
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="car-profile" element={<CarProfile />} />
-          <Route path="service-records" element={<ServiceRecords />} />
-          <Route path="predictive-alerts" element={<PredictiveAlerts />} />
-          <Route path="car-health" element={<CarHealth />} />
-          <Route path="appointment" element={<Appointment />} />
-          <Route path="mechanic-rating" element={<MechanicRating />} />
-          <Route path="notifications" element={<Notifications />} />
-          <Route path="admin" element={<Admin />} />
+          <Route path="/owner-profile" element={<OwnerProfile />} />
+          <Route path="/car-profile" element={<CarProfile />} />
+          <Route path="/service-records" element={<ServiceRecords />} />
+          <Route path="/predictive-alerts" element={<PredictiveAlerts />} />
+          <Route path="/appointment" element={<Appointment />} />
+          <Route path="/parts" element={<Parts />} />
+          <Route path="/service-parts" element={<ServiceParts />} />
+          <Route path="/reminders" element={<Reminders />} />
+          <Route path="/car-score" element={<CarScore />} /> 
         </Route>
       </Routes>
     </Router>
