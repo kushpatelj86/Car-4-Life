@@ -233,7 +233,7 @@ userrouter.get("/get_profile/:user_id",(req,res) =>{
     console.log("userid ", typeof(userid))
 
 
-    const sql_statement = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
+    const sql_statement = "SELECT * FROM USER WHERE `user_id` = ?";
 
     db.query(sql_statement,[userid], function (err, result) {
     if (err) 
@@ -266,42 +266,60 @@ userrouter.get("/get_profile/:user_id",(req,res) =>{
 })
 
 
-
-
-
 userrouter.post("/create_profile/:user_id", (req, res) => {
+    console.log("create being called");
     const userId = Number(req.params.user_id);
+    console.log("userId ", userId);
 
-    const sqlCheck = "SELECT * FROM DRIVER_PROFILE WHERE user_id = ?";
+    const sqlCheck = "SELECT * FROM USER WHERE user_id = ?";
 
     db.query(sqlCheck, [userId], (err, result) => {
+        console.log("Sql being called ");
         if (err) {
             return res.json({ message: 'Something unexpected occurred: ' + err });
         }
 
-      
-        const sqlcommand1 = `
+        console.log("Result:", result);
+
+        // Check if user exists
+        const exists = result.length > 0;
+
+        console.log("Exists:", exists);
+
+        if (!exists) {
+            return res.json({ message: "User does not exist" });
+        }
+
+        // Now insert the driver profile
+        const sqlInsert = `
             INSERT INTO DRIVER_PROFILE 
-            (phone_number, address, license_number, vehicle_type, experience_years, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?)`;
+            (user_id, address, license_number, driver_type, experience_years, status) 
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+    userId,
+    req.body.address || '',
+    req.body.license_number || '',
+    req.body.driver_type || '',       
+    Number(req.body.experience_years) || 0,
+    req.body.status || 'Active'
+];
 
-            const values = [
-        req.body.phone_number,
-        req.body.address,
-        req.body.license_number,
-        req.body.vehicle_type,
-        req.body.experience_years,
-        req.body.status
-    ]
 
-        db.query(sqlcommand1, values, (err2, result2) => {
+        db.query(sqlInsert, values, (err2, result2) => {
+            console.log(values)
+            console.log("Insert being called ")
             if (err2) {
+                console.log("There is a error ", err2)
                 return res.json({ message: 'Error saving driver profile: ' + err2 });
             }
-            res.json({ message: "Driver profile created" });
+
+            console.log("Driver profile created:", result2);
+            return res.json({ success: "Driver profile created" });
         });
     });
 });
+
 
 
 
@@ -319,7 +337,7 @@ userrouter.get("/update_profile/:user_id",(req,res) =>{
     console.log("userid ", typeof(userid))
 
 
-    const sql_statement1 = "SELECT * FROM PATIENT_PROFILE WHERE `user_id` = ?";
+    const sql_statement1 = "SELECT * FROM DRIVER_PROFILE WHERE `user_id` = ?";
 
     let exists = false;
 

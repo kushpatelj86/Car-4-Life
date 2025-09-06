@@ -51,7 +51,9 @@ export  async function  updateOwnerProfile (profileData, values) {
 
 export  async function  createOwnerProfile (profileData, values) {
   try {
-    console.log("/User id ",profileData)
+    console.log("/User id cretae ",profileData)
+    console.log("/User id cretae ",values)
+
     const res = await axios.post(`http://localhost:8000/user/create_profile/${profileData}`, values);
     return res.data;
   } catch (err) {

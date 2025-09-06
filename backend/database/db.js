@@ -25,10 +25,9 @@ const sqlStatements = [
 
   `CREATE TABLE IF NOT EXISTS DRIVER_PROFILE (
     user_id INT PRIMARY KEY,
-    phone_number VARCHAR(15),
     address VARCHAR(255),
     license_number VARCHAR(50),
-    vehicle_type VARCHAR(50),
+    driver_type VARCHAR(50),
     experience_years INT DEFAULT 0,
     access_level ENUM('Low','Medium','High') DEFAULT 'Low',
     status ENUM('Active','Inactive') DEFAULT 'Active',
@@ -48,6 +47,16 @@ const sqlStatements = [
     FOREIGN KEY(owner_user_id) REFERENCES USER(user_id),
     FOREIGN KEY(assigned_driver_id) REFERENCES USER(user_id)
   )`,
+
+
+  `CREATE TABLE IF NOT EXISTS MECHANIC_PROFILE (
+    mechanic_user_id INT PRIMARY KEY,
+    certifications TEXT,
+    specialties TEXT,
+    years_experience INT DEFAULT 0,
+    rating_avg DECIMAL(3,2) DEFAULT 0,
+    FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id)
+)`,
 
   `CREATE TABLE IF NOT EXISTS SERVICE_RECORD (
     service_id INT AUTO_INCREMENT PRIMARY KEY,

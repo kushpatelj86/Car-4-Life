@@ -95,18 +95,7 @@ const [profile_data, setProfileData] = useState({
         if(user_data.uid)
         {
             var profile = await getOwnerProfile(user_data.uid);
-            if (profile) {
-                setProfileData({
-                dietary_choice: user.dietary_choice,
-                height: user.height,
-                weight: user.weight,
-                age: user.age,
-                religion: user.religion,
-                goal: user.goal,
-                activity_level : user.activity_level,
-                access_level : user.access_level
-                });
-            }
+            
         }
       
     }

@@ -26,11 +26,11 @@ export function OwnerProfileCreateForm({ ownerValues, handleValsChange, handleOw
         />
         <br /><br />
 
-        <label htmlFor="vehicle_type">Vehicle Type</label>
+        <label htmlFor="driver_type">Vehicle Type</label>
         <input 
           type="text" 
-          id="vehicle_type" 
-          name="vehicle_type"
+          id="driver_type" 
+          name="driver_type"
           onChange={handleValsChange} 
           required
         />
