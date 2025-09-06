@@ -1,7 +1,17 @@
-CREATE DATABASE IF NOT EXISTS CARCAREDB;
-USE CARCAREDB;
+import mysql from 'mysql2';
 
-CREATE TABLE IF NOT EXISTS USER (
+export const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  multipleStatements: true
+});
+
+const sqlStatements = [
+  "CREATE DATABASE IF NOT EXISTS CARCAREDB",
+  "USE CARCAREDB",
+
+  `CREATE TABLE IF NOT EXISTS USER (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -10,17 +20,16 @@ CREATE TABLE IF NOT EXISTS USER (
     email VARCHAR(255) UNIQUE NOT NULL,
     role ENUM('OWNER','MECHANIC') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS OWNER_PROFILE (
+  `CREATE TABLE IF NOT EXISTS OWNER_PROFILE (
     user_id INT PRIMARY KEY,
     phone_number VARCHAR(15),
     address VARCHAR(255),
     FOREIGN KEY(user_id) REFERENCES USER(user_id)
-);
+  )`,
 
-
-CREATE TABLE IF NOT EXISTS CAR (
+  `CREATE TABLE IF NOT EXISTS CAR (
     car_id INT AUTO_INCREMENT PRIMARY KEY,
     owner_user_id INT NOT NULL,
     make VARCHAR(100),
@@ -30,9 +39,9 @@ CREATE TABLE IF NOT EXISTS CAR (
     mileage INT,
     fuel_type ENUM('Petrol','Diesel','Electric','Hybrid'),
     FOREIGN KEY(owner_user_id) REFERENCES USER(user_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS SERVICE_RECORD (
+  `CREATE TABLE IF NOT EXISTS SERVICE_RECORD (
     service_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     mechanic_user_id INT,
@@ -42,9 +51,9 @@ CREATE TABLE IF NOT EXISTS SERVICE_RECORD (
     cost DECIMAL(10,2),
     FOREIGN KEY(car_id) REFERENCES CAR(car_id),
     FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS APPOINTMENT (
+  `CREATE TABLE IF NOT EXISTS APPOINTMENT (
     appointment_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     mechanic_user_id INT NOT NULL,
@@ -54,25 +63,25 @@ CREATE TABLE IF NOT EXISTS APPOINTMENT (
     status ENUM('Scheduled','Completed','Cancelled') DEFAULT 'Scheduled',
     FOREIGN KEY(car_id) REFERENCES CAR(car_id),
     FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS PART (
+  `CREATE TABLE IF NOT EXISTS PART (
     part_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     cost DECIMAL(10,2)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS SERVICE_PART (
+  `CREATE TABLE IF NOT EXISTS SERVICE_PART (
     service_part_id INT AUTO_INCREMENT PRIMARY KEY,
     service_id INT NOT NULL,
     part_id INT NOT NULL,
     quantity INT DEFAULT 1,
     FOREIGN KEY(service_id) REFERENCES SERVICE_RECORD(service_id),
     FOREIGN KEY(part_id) REFERENCES PART(part_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS REMINDER (
+  `CREATE TABLE IF NOT EXISTS REMINDER (
     reminder_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     reminder_type VARCHAR(255),
@@ -80,9 +89,9 @@ CREATE TABLE IF NOT EXISTS REMINDER (
     message TEXT,
     is_completed BOOLEAN DEFAULT FALSE,
     FOREIGN KEY(car_id) REFERENCES CAR(car_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS CAR_SCORE (
+  `CREATE TABLE IF NOT EXISTS CAR_SCORE (
     score_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     date_recorded DATE DEFAULT CURRENT_DATE,
@@ -92,9 +101,9 @@ CREATE TABLE IF NOT EXISTS CAR_SCORE (
     appointment_score DECIMAL(5,2) DEFAULT 100,
     part_score DECIMAL(5,2) DEFAULT 100,
     FOREIGN KEY(car_id) REFERENCES CAR(car_id)
-);
+  )`,
 
-CREATE TABLE IF NOT EXISTS PREDICTIVE_ALERT (
+  `CREATE TABLE IF NOT EXISTS PREDICTIVE_ALERT (
     alert_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     recommended_task VARCHAR(255) NOT NULL,
@@ -103,4 +112,19 @@ CREATE TABLE IF NOT EXISTS PREDICTIVE_ALERT (
     confidence_level DECIMAL(5,2) DEFAULT 80,  
     is_completed BOOLEAN DEFAULT FALSE,
     FOREIGN KEY(car_id) REFERENCES CAR(car_id)
-);
+  )`,
+
+  `CREATE TABLE IF NOT EXISTS TRIP (
+    trip_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    driver_user_id INT NOT NULL,
+    start_date DATETIME NOT NULL,
+    end_date DATETIME,
+    start_mileage INT,
+    end_mileage INT,
+    purpose VARCHAR(255),
+    notes TEXT,
+    FOREIGN KEY(car_id) REFERENCES CAR(car_id),
+    FOREIGN KEY(driver_user_id) REFERENCES USER(user_id)
+  )`
+];

@@ -1,98 +1,54 @@
-import { useState } from 'react'
-import React from 'react'
-import {SignUpForm} from '../Components/SignUpForm.jsx'
-import { Navigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { SignUpForm } from '../Components/SignUpForm.jsx';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 
-
-
-
-
-
-
-
-export function SignUp(){
-
+export function SignUp() {
     const [hasAccount, setHasAccount] = useState(false);
-    const [values,setValues] = useState(
-       { 
+    const [values, setValues] = useState({
         first_name: '',
         last_name: '',
         username: '',
         password: '',
-        phone_number: '',
         email: '',
-        role: '',
+        role: '', 
+    });
 
-    }
-    )
-
-    const handleValsChange = e => {
-
-        const id = e.target.id;
-
-
-
-        setValues({...values, [id] : e.target.value});
-
-    
+    const handleValsChange = (e) => {
+        const { id, value } = e.target;
+        setValues({ ...values, [id]: value });
     };
 
-    
+    const handleHasAccount = (val) => setHasAccount(val);
 
-    function handleHasAccount(val){
-        setHasAccount(val);
-    }
-
-    function handleSignUpSubmit(e) {
+    const handleSignUpSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://127.0.0.1:8000/user/signup',values)
-        .then((res) =>{
+        axios.post('http://127.0.0.1:8000/user/signup', values)
+            .then((res) => {
+                if (res.data.success) {
+                    console.log(res.data);
+                    localStorage.setItem("currentUser", JSON.stringify({
+                        username: values.username,
+                        email: values.email,
+                        role: values.role
+                    }));
+                    handleHasAccount(true);
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                alert('Error signing up: ' + err);
+            });
+    };
 
-            if(res.data.success)
-            {
-                console.log(res.data);
-                alert(res.data)
-                localStorage.setItem("currentUser", JSON.stringify({
-                username: values.username,
-                email: values.email,
-                role: values.role
-                }));                
-                
-                handleHasAccount(true);
-
-
-            }
-            
-            
-
-        })
-        .catch((err) => {
-            console.log(err)
-            alert(err)
-        }  
-        )
-
-        console.log("Signing Up...");
-        alert("Signing Up...");
-}
-
-    
-    if(hasAccount === true)
-    {
-        return <Navigate to="/home" replace />;
-
-    }
-
-
-   
+    if (hasAccount) return <Navigate to="/home" replace />;
 
     return (
         <div>
-            <SignUpForm handleSignUpSubmit={handleSignUpSubmit} handleValsChange={handleValsChange}/>
-            
+            <SignUpForm 
+                handleSignUpSubmit={handleSignUpSubmit} 
+                handleValsChange={handleValsChange} 
+            />
         </div>
     );
-
-
 }

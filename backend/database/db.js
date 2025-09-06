@@ -4,7 +4,7 @@ export const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  multipleStatements: true 
+  multipleStatements: true
 });
 
 const sqlStatements = [
@@ -18,11 +18,11 @@ const sqlStatements = [
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(255) UNIQUE NOT NULL,
-    role ENUM('OWNER','MECHANIC','ADMIN') NOT NULL,
+    role ENUM('OWNER','MECHANIC','ADMIN','FLEET_MANAGER') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   )`,
 
-  `CREATE TABLE IF NOT EXISTS OWNER_PROFILE (
+  `CREATE TABLE IF NOT EXISTS DRIVER_PROFILE (
     user_id INT PRIMARY KEY,
     phone_number VARCHAR(15),
     address VARCHAR(255),
@@ -33,13 +33,15 @@ const sqlStatements = [
   `CREATE TABLE IF NOT EXISTS CAR (
     car_id INT AUTO_INCREMENT PRIMARY KEY,
     owner_user_id INT NOT NULL,
+    assigned_driver_id INT,
     make VARCHAR(100),
     model VARCHAR(100),
     year INT,
     vin VARCHAR(50) UNIQUE,
     mileage INT,
     fuel_type ENUM('Petrol','Diesel','Electric','Hybrid'),
-    FOREIGN KEY(owner_user_id) REFERENCES OWNER_PROFILE(user_id)
+    FOREIGN KEY(owner_user_id) REFERENCES USER(user_id),
+    FOREIGN KEY(assigned_driver_id) REFERENCES USER(user_id)
   )`,
 
   `CREATE TABLE IF NOT EXISTS SERVICE_RECORD (
@@ -54,6 +56,17 @@ const sqlStatements = [
     FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id)
   )`,
 
+  // Merged PART + SERVICE_PART
+  `CREATE TABLE IF NOT EXISTS SERVICE_PART (
+    service_part_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    cost DECIMAL(10,2),
+    quantity INT DEFAULT 1,
+    FOREIGN KEY(service_id) REFERENCES SERVICE_RECORD(service_id)
+  )`,
+
   `CREATE TABLE IF NOT EXISTS PREDICTIVE_ALERT (
     alert_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
@@ -62,6 +75,16 @@ const sqlStatements = [
     due_date DATE,
     confidence_level DECIMAL(5,2) DEFAULT 100,
     completed BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY(car_id) REFERENCES CAR(car_id)
+  )`,
+
+  `CREATE TABLE IF NOT EXISTS REMINDER (
+    reminder_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    reminder_type VARCHAR(255),
+    due_date DATE,
+    message TEXT,
+    is_completed BOOLEAN DEFAULT FALSE,
     FOREIGN KEY(car_id) REFERENCES CAR(car_id)
   )`,
 
@@ -92,7 +115,7 @@ const sqlStatements = [
     service_id INT,
     rating INT CHECK(rating BETWEEN 1 AND 5),
     feedback TEXT,
-    rating_date DATE DEFAULT CURRENT_DATE,
+    rating_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id),
     FOREIGN KEY(owner_user_id) REFERENCES USER(user_id),
     FOREIGN KEY(service_id) REFERENCES SERVICE_RECORD(service_id)
@@ -131,48 +154,28 @@ const sqlStatements = [
   `CREATE TABLE IF NOT EXISTS TRIP (
     trip_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
-    start_location VARCHAR(255) NOT NULL,
-    end_location VARCHAR(255) NOT NULL,
-    start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL,
-    distance_km DECIMAL(10,2) NOT NULL,
+    driver_user_id INT NOT NULL,
+    start_location VARCHAR(255),
+    end_location VARCHAR(255),
+    start_time DATETIME,
+    end_time DATETIME,
+    distance_km DECIMAL(10,2),
     fuel_used_liters DECIMAL(10,2),
-    FOREIGN KEY(car_id) REFERENCES CAR(car_id)
+    start_mileage INT,
+    end_mileage INT,
+    purpose VARCHAR(255),
+    notes TEXT,
+    FOREIGN KEY(car_id) REFERENCES CAR(car_id),
+    FOREIGN KEY(driver_user_id) REFERENCES USER(user_id)
   )`,
 
   `CREATE TABLE IF NOT EXISTS TRIP_REPORT (
     report_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
-    report_month YEAR_MONTH NOT NULL,
+    report_month DATE NOT NULL,
     total_distance DECIMAL(10,2) DEFAULT 0,
     total_fuel DECIMAL(10,2) DEFAULT 0,
     average_efficiency DECIMAL(5,2) DEFAULT 0,
-    FOREIGN KEY(car_id) REFERENCES CAR(car_id)
-  )`,
-
-  `CREATE TABLE IF NOT EXISTS PART (
-    part_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    description TEXT,
-    cost DECIMAL(10,2)
-  )`,
-
-  `CREATE TABLE IF NOT EXISTS SERVICE_PART (
-    service_part_id INT AUTO_INCREMENT PRIMARY KEY,
-    service_id INT NOT NULL,
-    part_id INT NOT NULL,
-    quantity INT DEFAULT 1,
-    FOREIGN KEY(service_id) REFERENCES SERVICE_RECORD(service_id),
-    FOREIGN KEY(part_id) REFERENCES PART(part_id)
-  )`,
-
-  `CREATE TABLE IF NOT EXISTS REMINDER (
-    reminder_id INT AUTO_INCREMENT PRIMARY KEY,
-    car_id INT NOT NULL,
-    reminder_type VARCHAR(255),
-    due_date DATE,
-    message TEXT,
-    is_completed BOOLEAN DEFAULT FALSE,
     FOREIGN KEY(car_id) REFERENCES CAR(car_id)
   )`
 ];

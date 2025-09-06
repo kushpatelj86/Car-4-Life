@@ -9,10 +9,10 @@ import { Login } from './Pages/Login';
 import { SignUp } from './Pages/SignUp';
 import { OwnerProfile } from './Pages/OwnerProfile';
 import { Parts } from './Pages/Parts';
-import { ServiceParts } from './Pages/ServiceParts';
 import { Reminders } from './Pages/Reminders';
+import { CarScore } from './Pages/CarScore';
+import { Trips } from './Pages/Trips'; 
 import { Layout } from './Components/Layout';
-import { CarScore } from './Pages/CarScore'; // New page for displaying scores
 
 function App() {
   return (
@@ -29,9 +29,9 @@ function App() {
           <Route path="/predictive-alerts" element={<PredictiveAlerts />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/parts" element={<Parts />} />
-          <Route path="/service-parts" element={<ServiceParts />} />
           <Route path="/reminders" element={<Reminders />} />
-          <Route path="/car-score" element={<CarScore />} /> 
+          <Route path="/car-score" element={<CarScore />} />
+          <Route path="/trips" element={<Trips />} /> 
         </Route>
       </Routes>
     </Router>

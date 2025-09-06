@@ -54,27 +54,27 @@ userrouter.get("/get_user/:username",(req,res) =>{
 })
 
 
-userrouter.post("/signup",(req,res) =>{
-    const sql_statement = "INSERT INTO USER (`username`, `password`,`first_name`,`last_name`,`phone_number`,`email`,`role`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    console.log("req.body.username ",req.body.username );
+userrouter.post("/signup", (req, res) => {
+    const sql_statement = `
+        INSERT INTO USER 
+        (username, password, first_name, last_name, email, role) 
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
 
     const values = [
         req.body.username,
         req.body.password,
         req.body.first_name,
         req.body.last_name,
-        req.body.phone_number,
         req.body.email,
-        req.body.role,
-    ]
+        req.body.role, // 'OWNER', 'MECHANIC', 'ADMIN', 'FLEET_MANAGER'
+    ];
 
-    db.query(sql_statement,values, function (err, result) {
-    if (err) return res.json({message: 'Something unexpected has occured '+err})
-    
-    return res.json({success:"User added successfully"})
-  })
-    
-})
+    db.query(sql_statement, values, function (err, result) {
+        if (err) return res.json({ message: 'Something unexpected occurred: ' + err });
+        return res.json({ success: "User added successfully" });
+    });
+});
 
 
 

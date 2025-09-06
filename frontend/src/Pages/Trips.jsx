@@ -21,7 +21,7 @@ function updatePhoto(){
 
 
 
-export function OwnerProfile(){
+export function Trips(){
 
     const [changeProfile, setChangeProfile] = useState(false);
 
@@ -174,9 +174,16 @@ const [profile_data, setProfileData] = useState({
                     <li>Name: {user_data.fname} {user_data.lname}</li>
                     <li>Username: {currentUser.username}</li>
                     <li>User Id: {user_data.uid}</li>
-                    <li>Phone: </li>
-                    <li>Address: </li>
-                    <li>Access Level: </li>
+                    <li>Dietary Choice: </li>
+                    <li>Height: </li>
+                    <li>Weight: </li>
+                    <li>Age: </li>
+                    <li>Religion: </li>
+                    <li>Goal: </li>
+                    <li>Activity Level: </li>
+                    <li>Health Issues: </li>
+                    <li>Nuerodivergence: </li>
+                    <li>Drug History: </li>
                     <li>Role: {user_data.role}</li>
 
                 </ul>
@@ -187,7 +194,7 @@ const [profile_data, setProfileData] = useState({
   {changeProfile ? (
     <>
         <h1>Update Information</h1>
- 
+
       <UpdateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />
       <h1>Create Information</h1>
       <CreateList handleChangeAcount={handleChangeProfile} user_data={user_data} updateUser={updateUser} />

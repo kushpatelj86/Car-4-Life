@@ -21,7 +21,7 @@ function updatePhoto(){
 
 
 
-export function Profile(){
+export function CarProfile(){
 
     const [changeProfile, setChangeProfile] = useState(false);
 
