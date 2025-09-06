@@ -18,9 +18,10 @@ const sqlStatements = [
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(255) UNIQUE NOT NULL,
+    phone_number VARCHAR(20) NOT NULL UNIQUE,
     role ENUM('OWNER','MECHANIC','ADMIN','FLEET_MANAGER') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )`,
+)`,
 
   `CREATE TABLE IF NOT EXISTS DRIVER_PROFILE (
     user_id INT PRIMARY KEY,
@@ -56,7 +57,6 @@ const sqlStatements = [
     FOREIGN KEY(mechanic_user_id) REFERENCES USER(user_id)
   )`,
 
-  // Merged PART + SERVICE_PART
   `CREATE TABLE IF NOT EXISTS SERVICE_PART (
     service_part_id INT AUTO_INCREMENT PRIMARY KEY,
     service_id INT NOT NULL,

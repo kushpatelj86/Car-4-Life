@@ -80,7 +80,7 @@ const [profile_data, setProfileData] = useState({
           fname: user.first_name,
           lname: user.last_name,
           phone: user.phone_number,
-          email: user.phone,
+          email: user.email,
           role: user.role,
           uid: Number(user.user_id)
         });
@@ -154,7 +154,7 @@ const [profile_data, setProfileData] = useState({
 
         <div id='patient-profile'>
 
-            <h1>User profile</h1>
+            <h1>Owner profile</h1>
 
 
 
@@ -175,6 +175,7 @@ const [profile_data, setProfileData] = useState({
                     <li>Username: {currentUser.username}</li>
                     <li>User Id: {user_data.uid}</li>
                     <li>Phone: </li>
+                    <li>Email: {user_data.email} </li>
                     <li>Address: </li>
                     <li>Access Level: </li>
                     <li>Role: {user_data.role}</li>
