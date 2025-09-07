@@ -248,7 +248,25 @@ userrouter.get("/get_profile/:user_id",(req,res) =>{
         console.log(result[0])
         if(result.length !== 0)
         {
-            return res.json({user : (result[0]) })
+
+            const sql_statement2 = "SELECT * FROM DRIVER_PROFILE WHERE user_id = ?";
+
+
+
+
+             db.query(sql_statement2, [userid], (err2, result2) => {
+            console.log(userid)
+            console.log("Insert being called ")
+            if (err2) {
+                console.log("There is a error ", err2)
+                return res.json({ message: 'Error saving driver profile: ' + err2 });
+            }
+
+            console.log("Driver profile retrieved:", result2);
+
+            return res.json({user : (result2[0]) })
+
+        });
         }
         else
         {

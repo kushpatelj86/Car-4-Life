@@ -41,15 +41,12 @@ export function OwnerProfile(){
 
 
 const [profile_data, setProfileData] = useState({
-        dietary_choice : '',
-        height : '',
-        weight : '',
-        age : '',
-        religion : '',
-        goal : '',
-        activity_level : '',
-        access_level : ''
-
+        address: '',
+        license_number: '',
+        driver_type: '',
+        experience_years: 0,
+        access_level: '',
+        status: ''
 });
         
 
@@ -92,11 +89,19 @@ const [profile_data, setProfileData] = useState({
 
     async function fetchOwnerProfileData() {
 
-        if(user_data.uid)
-        {
-            var profile = await getOwnerProfile(user_data.uid);
-            
-        }
+       var data = await getOwnerProfile(user_data.uid);
+       alert(data.address)
+      if(data) {
+            setProfileData({
+                address: data.address,
+                license_number: data.license_number,
+                driver_type: data.driver_type,
+                experience_years: data.experience_years,
+                access_level: data.access_level,
+                status: data.status
+            });
+          }
+
       
     }
 
@@ -165,8 +170,16 @@ const [profile_data, setProfileData] = useState({
                     <li>User Id: {user_data.uid}</li>
                     <li>Phone: {user_data.phone}</li>
                     <li>Email: {user_data.email} </li>
-                    <li>Address: </li>
-                    <li>Access Level: </li>
+                    <li>Address:{profile_data.address} </li>
+                    <li>Liscence Number: {profile_data.license_number} </li>
+
+                    <li>Driver Type: {profile_data.driver_type} </li>
+
+                    <li>Experience Years: {profile_data.experience_years} </li>
+
+                    <li>Status: {profile_data.status} </li>
+
+                    <li>Access Level: {profile_data.access_level} </li>
                     <li>Role: {user_data.role}</li>
 
                 </ul>
