@@ -45,7 +45,7 @@ export function CarProfile() {
     if (data.success) {
       alert(data.success);
       setCarValues({
-        owner_user_id: user_data.uid,
+        owner_user_id: data.uid,
         make: data.make,
         model: data.model,
         year: data.year,
