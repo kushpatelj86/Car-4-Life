@@ -16,12 +16,13 @@ userrouter.post("/add_car", (req, res) => {
     `;
 
     const values = [
-        req.body.username,
-        req.body.password,
-        req.body.first_name,
-        req.body.last_name,
-        req.body.email,
-        req.body.role, 
+        req.body.owner_user_id,
+        req.body.make,
+        req.body.model,
+        req.body.year,
+        req.body.vin,
+        req.body.mileage,
+        req.body.fuel_type 
     ];
 
     db.query(sql_statement, values, function (err, result) {

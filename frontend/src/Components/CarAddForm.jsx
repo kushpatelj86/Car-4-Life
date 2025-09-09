@@ -1,6 +1,20 @@
-export function CarAddForm({ user_values, handleValsChange, handleCarSubmit }) {
+export function CarAddForm({ car_values, handleValsChange, handleCarSubmit }) {
   return (
     <form onSubmit={handleCarSubmit} id="car-add-form">
+
+
+
+      <label htmlFor="user-id">User Id:</label>
+      <input
+        type="number"
+        id="user-id"
+        name="user-id"
+        value={user_values.user-id}
+        onChange={handleValsChange}
+        required
+      />
+
+
       <label htmlFor="make">Make:</label>
       <input
         type="text"

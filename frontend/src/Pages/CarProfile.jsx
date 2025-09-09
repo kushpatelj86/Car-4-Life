@@ -17,16 +17,7 @@ export function CarProfile() {
     fuel_type: "",
   });
 
-  const [currentUser, setCurrentUser] = useState(null);
-  const [user_data, setUserData] = useState({
-    uname: "",
-    fname: "",
-    lname: "",
-    phone: "",
-    email: "",
-    role: "",
-    uid: "",
-  });
+
 
   const handleValsChange = (e) => {
     const { name, value } = e.target;
@@ -51,43 +42,24 @@ export function CarProfile() {
     console.log("Submitting new car:", newCar);
 
     const data = await addCar(newCar);
-    if (data?.success) {
+    if (data.success) {
       alert(data.success);
       setCarValues({
         owner_user_id: user_data.uid,
-        make: "",
-        model: "",
-        year: "",
-        vin: "",
-        mileage: "",
-        fuel_type: "",
+        make: data.make,
+        model: data.model,
+        year: data.year,
+        vin: data.vin,
+        mileage: data.mileage,
+        fuel_type: data.fuel_type,
       });
     } else {
       alert("Failed to add car");
     }
   };
 
-  async function fetchUserData(username) {
-    const user = await getUser(username);
-    if (user) {
-      setUserData({
-        fname: user.first_name,
-        lname: user.last_name,
-        phone: user.phone_number,
-        email: user.email,
-        role: user.role,
-        uid: Number(user.user_id),
-      });
-    }
-  }
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    setCurrentUser(user);
-    if (user?.username) {
-      fetchUserData(user.username);
-    }
-  }, []);
+  
 
   return (
     <div id="patient-profile">
@@ -96,7 +68,7 @@ export function CarProfile() {
 
       <div id="add-car">
         <CarAddForm
-          user_values={car_values}
+          car_values={car_values}
           handleValsChange={handleValsChange}
           handleCarSubmit={handleCarSubmit}
         />
