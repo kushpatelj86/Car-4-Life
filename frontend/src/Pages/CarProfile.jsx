@@ -20,23 +20,15 @@ export function CarProfile() {
 
 
   const handleValsChange = (e) => {
-    const { name, value } = e.target;
-    setCarValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const id = e.target.id;
+    setCarValues({...car_values, [id]: e.target.value});
   };
 
   const handleCarSubmit = async (e) => {
     e.preventDefault();
-    if (!user_data.uid) {
-      alert("User not loaded yet");
-      return;
-    }
 
     const newCar = {
-      ...car_values,
-      owner_user_id: user_data.uid,
+      ...car_values    
     };
 
     console.log("Submitting new car:", newCar);
@@ -51,7 +43,7 @@ export function CarProfile() {
         year: data.year,
         vin: data.vin,
         mileage: data.mileage,
-        fuel_type: data.fuel_type,
+        fuel_type: data.fuel_type
       });
     } else {
       alert("Failed to add car");
@@ -71,6 +63,7 @@ export function CarProfile() {
           car_values={car_values}
           handleValsChange={handleValsChange}
           handleCarSubmit={handleCarSubmit}
+
         />
       </div>
     </div>

@@ -2,13 +2,16 @@ import express from 'express';
 import {db} from '../database/db.js'
 
 const port = process.env.PORT || 8000;
-const userrouter = express.Router()
+const carrouter = express.Router()
 
 
 
 
 
-userrouter.post("/add_car", (req, res) => {
+carrouter.post("/add_car", (req, res) => {
+
+    console.log("Add Car being called ")
+
     const sql_statement = `
         INSERT INTO CAR 
         (owner_user_id, make, model, year, vin, mileage, fuel_type) 
@@ -25,8 +28,14 @@ userrouter.post("/add_car", (req, res) => {
         req.body.fuel_type 
     ];
 
+    console.log("Values ",values);
+
     db.query(sql_statement, values, function (err, result) {
-        if (err) return res.json({ message: 'Something unexpected occurred: ' + err });
+        if (err) {
+            console.log("Error " + err)
+            return res.json({ message: 'Something unexpected occurred: ' + err })
+        };
         return res.json({ success: "User added successfully" });
     });
 });
+export default carrouter;

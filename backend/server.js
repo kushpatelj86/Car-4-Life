@@ -1,5 +1,7 @@
 import express from 'express';
 import userrouter from './routes/user.js'
+import carrouter from './routes/car.js'
+
 import cors from 'cors'
 
 const port = process.env.PORT || 8000;
@@ -23,7 +25,7 @@ app.get('/',(reg,res)=>{
 
 app.use("/user",userrouter)
 
-
+app.use("/car",carrouter)
 
 
 
