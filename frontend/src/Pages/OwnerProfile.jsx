@@ -23,6 +23,8 @@ function updatePhoto(){
 
 export function OwnerProfile(){
 
+  
+
     const [changeOwnerProfile, setChangeOwnerProfile] = useState(false);
 
     const [currentUser, setCurrentUser] = useState([]);
@@ -81,6 +83,10 @@ const [profile_data, setProfileData] = useState({
           role: user.role,
           uid: Number(user.user_id)
         });
+
+        localStorage.setItem("userId", JSON.stringify({
+                user_id: 
+                user_data.uid}));    
       }
     }
 
